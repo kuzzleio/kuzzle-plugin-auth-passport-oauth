@@ -1,0 +1,19 @@
+# Node
+node_modules
+npm-debug.log*
+.node_history
+# Exclude coverage report
+!/coverage/
+/coverage/*
+!/coverage/scripts
+
+# IDE
+.idea
+
+# Other
+.DS_STORE
+*#
+*~
+.*.swp
+.tags
+

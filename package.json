@@ -1,0 +1,62 @@
+{
+  "name": "kuzzle-plugin-auth-github",
+  "version": "0.0.1",
+  "description": "Kuzzle plugin to log-in users",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kuzzleio/kuzzle-plugin-auth-github.git"
+  },
+  "keywords": [
+    "kuzzle",
+    "plugin",
+    "auth",
+    "passportjs",
+    "github",
+    "oauth2"
+  ],
+  "author": {
+    "name": "Kuzzle Team"
+  },
+  "bugs": {
+    "url": "https://github.com/kuzzleio/kuzzle-plugin-auth-github/issues"
+  },
+  "pluginInfo": {
+    "defaultConfig": {}
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "passport": "0.3.2",
+    "passport-github": "1.0.0",
+    "passport-oauth2": "1.x.x"
+  },
+  "devDependencies": {
+    "eslint": "1.9.0",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.3",
+    "gruntify-eslint": "^1.2.0",
+    "mocha": "2.3.3",
+    "should": "7.1.1",
+    "rewire": "2.4.0"
+  },
+  "gitHead": "06f51a7b72065f5961f135b75d7a937b2937b83d",
+  "homepage": "https://github.com/kuzzleio/kuzzle-plugin-auth-github#readme",
+  "_id": "kuzzle-plugin-auth-github@0.0.1",
+  "_from": "git+https://github.com/kuzzleio/kuzzle-plugin-auth-github.git",
+  "_npmVersion": "2.14.7",
+  "_nodeVersion": "4.2.2",
+  "_npmUser": {
+    "name": "kuzzle",
+    "email": "support@kuzzle.io"
+  },
+  "maintainers": [
+    {
+      "name": "kuzzle",
+      "email": "support@kuzzle.io"
+    }
+  ],
+  "readme": "[![Build Status](https://travis-ci.org/kuzzleio/kuzzle-plugin-auth-github.svg?branch=master)](https://travis-ci.org/kuzzleio/kuzzle-plugin-auth-github)\n\n![logo](https://raw.githubusercontent.com/kuzzleio/kuzzle/master/docs/images/logo.png)\n\n# Plugin Local Password Authentication\n\nThis plugin provides a local authentication with username/password with [passportjs module](http://passportjs.org/docs/username-password).\n\nBy default, this plugin is already installed in Kuzzle.\n\n# Manifest\n\nThis plugin doesn't need any right.\n\n# Configuration\n\n\n# Usage\n\nJust send following data to the **auth** controller:\n\n```json\n{\"body\":{\n  \"strategy\": \"local\",\n  \"username\": \"<username>\",\n  \"password\":\"<password>\"\n}}\n```\n\nSee [Kuzzle API Documentation](http://kuzzleio.github.io/kuzzle-api-documentation/#auth-controller) for more details about Kuzzle authentication mechanism.\n\n# How to create a plugin\n\nSee [Kuzzle documentation](https://github.com/kuzzleio/kuzzle/docs/plugins.md) about plugin for more information about how to create your own plugin.\n\n# About Kuzzle\n\nFor UI and linked objects developers, [Kuzzle](https://github.com/kuzzleio/kuzzle) is an open-source solution that handles all the data management\n(CRUD, real-time storage, search, high-level features, etc).\n\n[Kuzzle](https://github.com/kuzzleio/kuzzle) features are accessible through a secured API. It can be used through a large choice of protocols such as REST, Websocket or Message Queuing protocols.",
+  "readmeFilename": "README.md",
+  "_shasum": "644abebc089a113cfe2151f0bef58afd108f2585",
+  "_resolved": "git+https://github.com/kuzzleio/kuzzle-plugin-auth-github.git#9ad027aa148797cb1a9d3ab0220a6255813f6abc"
+}

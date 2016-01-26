@@ -21,7 +21,7 @@ See [Kuzzle API Documentation](http://kuzzleio.github.io/kuzzle-api-documentatio
 
 # How to create a plugin
 
-See [Kuzzle documentation](https://github.com/kuzzleio/kuzzle/docs/plugins.md) about plugin for more information about how to create your own plugin.
+See [Kuzzle documentation](https://github.com/kuzzleio/kuzzle/blob/master/docs/plugins.md) about plugin for more information about how to create your own plugin.
 
 # About Kuzzle
 

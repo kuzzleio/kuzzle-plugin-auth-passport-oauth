@@ -1,8 +1,11 @@
 {
   "name": "kuzzle-plugin-auth-github",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Kuzzle plugin to log-in users",
   "main": "./lib/index.js",
+  "scripts": {
+    "test": "grunt && mocha"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kuzzleio/kuzzle-plugin-auth-github.git"
@@ -22,7 +25,9 @@
     "url": "https://github.com/kuzzleio/kuzzle-plugin-auth-github/issues"
   },
   "pluginInfo": {
-    "defaultConfig": {}
+    "defaultConfig": {
+      "persist": false
+    }
   },
   "license": "Apache-2.0",
   "dependencies": {

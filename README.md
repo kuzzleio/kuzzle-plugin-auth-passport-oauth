@@ -54,10 +54,12 @@ Here is an example of a configuration:
 
 Just send following data to the auth controller:
 
+```json
 {"body":{
   "strategy": "github",
   "username": "<username>"
 }}
+```
 
 See [Kuzzle API Documentation](http://kuzzleio.github.io/kuzzle-api-documentation/#auth-controller) for more details about Kuzzle authentication mechanism.
 

@@ -12,10 +12,52 @@ This plugin doesn't need any right.
 
 # Configuration
 
+You can override the configuration in your `config/customPlugins.json` file in Kuzzle:
+
+| Name | Default value | Type | Description                 |
+|------|---------------|-----------|-----------------------------|
+| ``persist`` | ``{}`` | Object | Attributes you want to persist if the user doesn't exist |
+| ``scope`` | ``[]`` | Array | List of attributes which requires rights to get |
+| ``clientID`` |  | String | Github clientID |
+| ``clientSecret`` |  | String | Github secret |
+| ``callbackUrl`` |  | String | Github callback url |
+
+Here is an example of a configuration:
+
+```json
+  "kuzzle-plugin-auth-github": {
+    "version": "1.0.0",
+    "activated": true,
+    "name": "kuzzle-plugin-auth-github",
+    "defaultConfig": {
+      "persist": {}
+    },
+    "customConfig": {
+      "persist": [
+        "login",
+        "avatar_url",
+        "name",
+        "email"
+      ],
+      "scope": [
+        "user:email",
+        "user:avatar_url"
+      ],
+      "clientID": "<your-client-id>",
+      "clientSecret": "<your-client-secret>",
+      "callbackUrl": "http://host:7511/api/1.0/_login/github"
+    }
+  }
+```
 
 # Usage
 
-@TODO : complete doc.
+Just send following data to the auth controller:
+
+{"body":{
+  "strategy": "github",
+  "username": "<username>"
+}}
 
 See [Kuzzle API Documentation](http://kuzzleio.github.io/kuzzle-api-documentation/#auth-controller) for more details about Kuzzle authentication mechanism.
 

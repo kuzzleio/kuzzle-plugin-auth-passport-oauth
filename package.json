@@ -26,14 +26,16 @@
   },
   "pluginInfo": {
     "defaultConfig": {
-      "persist": false
+      "persist": {}
     }
   },
   "license": "Apache-2.0",
   "dependencies": {
     "passport": "0.3.2",
     "passport-github": "1.0.0",
-    "passport-oauth2": "1.x.x"
+    "passport-oauth2": "1.x.x",
+    "passport-oauth2-refresh": "1.0.0",
+    "q": "2.0.3"
   },
   "devDependencies": {
     "eslint": "1.9.0",
@@ -41,8 +43,9 @@
     "grunt-contrib-jshint": "^0.11.3",
     "gruntify-eslint": "^1.2.0",
     "mocha": "2.3.3",
-    "should": "7.1.1",
-    "rewire": "2.4.0"
+    "proxyquire": "^1.7.3",
+    "rewire": "2.4.0",
+    "should": "8.1.1"
   },
   "gitHead": "06f51a7b72065f5961f135b75d7a937b2937b83d",
   "homepage": "https://github.com/kuzzleio/kuzzle-plugin-auth-github#readme",

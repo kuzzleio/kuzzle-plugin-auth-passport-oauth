@@ -1,7 +1,7 @@
 {
   "name": "kuzzle-plugin-auth-github",
   "version": "1.0.0",
-  "description": "Kuzzle plugin to log-in users",
+  "description": "Kuzzle plugin to log-in users through github",
   "main": "./lib/index.js",
   "scripts": {
     "test": "grunt && mocha"

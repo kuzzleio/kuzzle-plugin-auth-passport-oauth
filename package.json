@@ -1,6 +1,6 @@
 {
   "name": "kuzzle-plugin-auth-github",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Kuzzle plugin to log-in users through github",
   "main": "./lib/index.js",
   "scripts": {

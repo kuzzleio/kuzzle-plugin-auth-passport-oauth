@@ -18,7 +18,7 @@ You can override the configuration in your `config/customPlugins.json` file in K
 |------|---------------|-----------|-----------------------------|
 | ``persist`` | ``{}`` | Object | Attributes you want to persist if the user doesn't exist |
 | ``scope`` | ``[]`` | Array | List of attributes which requires rights to get |
-| ``profile`` | ``default`` | Array | Profile of the new persisted user |
+| ``profile`` | ``default`` | String | Profile of the new persisted user |
 | ``clientID`` |  | String | Github clientID |
 | ``clientSecret`` |  | String | Github secret |
 | ``callbackUrl`` |  | String | Github callback url |

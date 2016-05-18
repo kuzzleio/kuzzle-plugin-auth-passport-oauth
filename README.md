@@ -1,10 +1,10 @@
-[![Build Status](https://travis-ci.org/kuzzleio/kuzzle-plugin-auth-github.svg?branch=master)](https://travis-ci.org/kuzzleio/kuzzle-plugin-auth-github)
+[![Build Status](https://travis-ci.org/kuzzleio/kuzzle-plugin-auth-passport-oauth.svg?branch=master)](https://travis-ci.org/kuzzleio/kuzzle-plugin-auth-passport-oauth)
 
 ![logo](https://raw.githubusercontent.com/kuzzleio/kuzzle/master/docs/images/logo.png)
 
-# Plugin Github Authentication
+# Plugin Passport OAUTH Authentication
 
-This plugin provides a authentication with [passportjs github strategy](https://github.com/jaredhanson/passport-github).
+This plugin provides an authentication with [passportjs strategies](http://passportjs.org/docs).
 
 # Manifest
 
@@ -16,12 +16,10 @@ You can override the configuration in your `config/customPlugins.json` file in K
 
 | Name | Default value | Type | Description                 |
 |------|---------------|-----------|-----------------------------|
+| ``strategies`` | ``[]`` | Array | List of the providers you want to use with passport |
 | ``persist`` | ``{}`` | Object | Attributes you want to persist if the user doesn't exist |
 | ``scope`` | ``[]`` | Array | List of attributes which requires rights to get |
-| ``profile`` | ``default`` | String | Profile of the new persisted user |
-| ``clientID`` |  | String | Github clientID |
-| ``clientSecret`` |  | String | Github secret |
-| ``callbackUrl`` |  | String | Github callback url |
+| ``profile`` | ``default`` | Array | Profile of the new persisted user |
 
 Here is an example of a configuration:
 
@@ -29,25 +27,86 @@ Here is an example of a configuration:
   "kuzzle-plugin-auth-github": {
     "version": "1.0.0",
     "activated": true,
-    "name": "kuzzle-plugin-auth-github",
+    "name": "kuzzle-plugin-auth-passport-oauth",
     "defaultConfig": {
       "persist": {}
     },
     "customConfig": {
-      "persist": [
-        "login",
-        "avatar_url",
-        "name",
-        "email"
+      "strategies": [
+        {
+            "name": "facebook",
+            "credentials": {
+              "clientID": "<your-client-id>",
+              "clientSecret": "<your-client-secret>",
+              "callbackUrl": "http://host:7511/api/1.0/_login/facebook"
+            },
+            "persist": [
+              "login",
+              "avatar_url",
+              "name",
+              "email"
+            ],
+            "scope": [
+              "user:email",
+              "user:avatar_url"
+            ]
+        },
+        {
+            "name": "twitter",
+            "credentials": {
+              "consumerKey": "<your-client-id>",
+              "consumerSecret": "<your-client-secret>",
+              "callbackUrl": "http://host:7511/api/1.0/_login/twitter"
+            },
+            "persist": [
+              "login",
+              "avatar_url",
+              "name",
+              "email"
+            ],
+            "scope": [
+              "user:email",
+              "user:avatar_url"
+            ]
+        },
+        {
+            "name": "google-oauth",
+            "credentials": {
+              "consumerKey": "<your-client-id>",
+              "consumerSecret": "<your-client-secret>",
+              "callbackUrl": "http://host:7511/api/1.0/_login/google-plus"
+            },
+            "persist": [
+              "login",
+              "avatar_url",
+              "name",
+              "email"
+            ],
+            "scope": [
+              "user:email",
+              "user:avatar_url"
+            ]
+        },
+        {
+            "name": "github",
+            "credentials": {
+              "clientID": "<your-client-id>",
+              "clientSecret": "<your-client-secret>",
+              "callbackUrl": "http://host:7511/api/1.0/_login/github"
+            },
+            "persist": [
+              "login",
+              "avatar_url",
+              "name",
+              "email"
+            ],
+            "scope": [
+              "user:email",
+              "user:avatar_url"
+            ]
+        }
       ],
-      "scope": [
-        "user:email",
-        "user:avatar_url"
-      ],
-      "defaultProfile": "default",
-      "clientID": "<your-client-id>",
-      "clientSecret": "<your-client-secret>",
-      "callbackUrl": "http://host:7511/api/1.0/_login/github"
+      "defaultProfile": "default"
     }
   }
 ```
@@ -57,10 +116,12 @@ Here is an example of a configuration:
 Just send following data to the auth controller:
 
 ```json
-{"body":{
-  "strategy": "github",
+{
+ "body": {
+  "strategy": "facebook",
   "username": "<username>"
-}}
+ }
+}
 ```
 
 See [Kuzzle API Documentation](http://kuzzleio.github.io/kuzzle-api-documentation/#auth-controller) for more details about Kuzzle authentication mechanism.

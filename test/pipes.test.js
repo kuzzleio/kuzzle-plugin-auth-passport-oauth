@@ -2,14 +2,14 @@ var
   should = require('should'),
   pipes = require('../lib/config/pipes'),
   rewire = require('rewire'),
-  PluginGithub = rewire('../lib');
+  PluginOAuth = rewire('../lib');
 
 describe('pipes definition', function() {
-  var pluginGithub;
+  var pluginOAuth;
 
   before(function () {
-    pluginGithub = new PluginGithub();
-    pluginGithub.init({persist: true, clientID: 'id', clientSecret: 'secret', callbackUrl: 'http://callback.url', scope: ['test']});
+    pluginOAuth = new PluginOAuth();
+    pluginOAuth.init({persist: true, strategies: [{name: "facebook", clientID: "id", clientSecret: "secret", callbackUrl: "http://callback.url", scope: ['test']}]});
   });
 
   it('should link kuzzle pipe correctly', function() {
@@ -18,8 +18,8 @@ describe('pipes definition', function() {
   });
 
   it('should trigger loadScope pipe', function(done) {
-    pluginGithub.loadScope({scope: {}}, function(err, object) {
-      should(object.github[0]).equal('test');
+    pluginOAuth.loadScope({scope: {}}, function(err, object) {
+      should(object.facebook[0]).equal('test');
       done();
     });
   });

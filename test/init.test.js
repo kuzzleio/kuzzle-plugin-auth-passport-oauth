@@ -1,38 +1,30 @@
 var
   should = require('should'),
   rewire = require('rewire'),
-  PluginGithub = rewire('../lib');
+  PluginOAuth = rewire('../lib');
 
-describe('The plugin github initialization', function () {
+describe('The plugin oauth initialization', function () {
 
-  var pluginGithub;
+  var pluginOAuth;
 
   before(function () {
-    pluginGithub = new PluginGithub();
+    pluginOAuth = new PluginOAuth();
   });
 
   it('should return an error if no config is provided', function () {
-    should(pluginGithub.init()).be.false();
+    should(pluginOAuth.init()).be.false();
+  });
+
+  it('should return an error if strategies config is empty', function() {
+    should(pluginOAuth.init({strategies: []})).be.false();
   });
 
   it('should return an error if a configuration without "persist" is provided', function () {
-    should(pluginGithub.init({foo: 'bar'})).be.false();
+    should(pluginOAuth.init({strategies: ['facebook'], foo: 'bar'})).be.false();
   });
 
-  it('should return an error if no clientID is provided', function () {
-    should(pluginGithub.init({})).be.false();
-  });
-
-  it('should return an error if no clientSecret is provided', function () {
-    should(pluginGithub.init({clientID: "id"})).be.false();
-  });
-
-  it('should return an error if no callbackURL is provided', function () {
-    should(pluginGithub.init({clientID: "id", clientSecret: "secret"})).be.false();
-  });
-
-  it('should return pluginGithub object if everything is ok', function () {
-    should(pluginGithub.init({persist: true, clientID: "id", clientSecret: "secret", callbackUrl: "http://callback.url"})).be.Object();
+  it('should return pluginOauth object if everything is ok', function () {
+    should(pluginOAuth.init({persist: true, strategies: [{name: "facebook", clientID: "id", clientSecret: "secret", callbackUrl: "http://callback.url"}]})).be.Object();
   });
 
 });

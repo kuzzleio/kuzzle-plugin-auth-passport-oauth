@@ -1,21 +1,20 @@
 {
-  "name": "kuzzle-plugin-auth-github",
-  "version": "1.0.3",
-  "description": "Kuzzle plugin to log-in users through github",
+  "name": "kuzzle-plugin-auth-passport-oauth",
+  "version": "1.0.0",
+  "description": "Kuzzle plugin to log-in users through passport's strategies",
   "main": "./lib/index.js",
   "scripts": {
     "test": "grunt && mocha"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kuzzleio/kuzzle-plugin-auth-github.git"
+    "url": "git+https://github.com/kuzzleio/kuzzle-plugin-auth-passport-oauth.git"
   },
   "keywords": [
     "kuzzle",
     "plugin",
     "auth",
     "passportjs",
-    "github",
     "oauth2"
   ],
   "author": {
@@ -32,9 +31,13 @@
   "license": "Apache-2.0",
   "dependencies": {
     "passport": "0.3.2",
+    "passport-facebook": "^2.1.1",
     "passport-github": "1.0.0",
+    "passport-google-oauth": "^1.0.0",
+    "passport-google-plus": "^0.5.1",
     "passport-oauth2": "1.x.x",
     "passport-oauth2-refresh": "1.0.0",
+    "passport-twitter": "^1.0.4",
     "q": "2.0.3"
   },
   "devDependencies": {

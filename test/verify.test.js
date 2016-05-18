@@ -2,26 +2,75 @@ var
   should = require('should'),
   pipes = require('../lib/config/pipes'),
   rewire = require('rewire'),
-  PluginGithub = rewire('../lib'),
+  PluginOAuth = rewire('../lib'),
   Strategy = require('../lib/passport/strategy'),
   proxyquire = require('proxyquire'),
   q = require('q');
 
 describe('passport verify', function() {
   var
-    pluginGithub,
+    pluginOAuth,
     Passport,
     isCalled = false,
     config = {
-      "persist": [
-        "login"
-      ],
-      "scope": [
-        "user:email"
-      ],
-      "clientID": "<your-client-id>",
-      "clientSecret": "<your-client-secret>",
-      "callbackUrl": "http://host:7511/api/1.0/_login/github"
+      "strategies": [
+        {
+          name: "facebook",
+          "credentials": {
+            "clientID": "<your-client-id>",
+            "clientSecret": "<your-client-secret>",
+            "callbackUrl": "http://host:7511/api/1.0/_login/facebook",
+          },
+          "persist": [
+            "login"
+          ],
+          "scope": [
+            "user:email"
+          ]
+        },
+        {
+          name: "twitter",
+          "credentials": {
+            "consumerKey": "<your-client-id>",
+            "consumerSecret": "<your-client-secret>",
+            "callbackUrl": "http://host:7511/api/1.0/_login/twitter"
+          },
+          "persist": [
+            "login"
+          ],
+          "scope": [
+            "user:email"
+          ]
+        },
+        {
+          name: "google-oauth",
+          "credentials": {
+            "consumerKey": "<your-client-id>",
+            "consumerSecret": "<your-client-secret>",
+            "callbackUrl": "http://host:7511/api/1.0/_login/google-plus"
+          },
+          "persist": [
+            "login"
+          ],
+          "scope": [
+            "user:email"
+          ]
+        },
+        {
+          name: "github",
+          "credentials": {
+            "clientID": "<your-client-id>",
+            "clientSecret": "<your-client-secret>",
+            "callbackUrl": "http://host:7511/api/1.0/_login/github"
+          },
+          "persist": [
+            "login"
+          ],
+          "scope": [
+            "user:email"
+          ]
+        }
+      ]
     },
     context = {
       repositories: function() {
@@ -45,8 +94,8 @@ describe('passport verify', function() {
     };
 
   before(function () {
-    pluginGithub = new PluginGithub();
-    pluginGithub.init({persist: true, clientID: 'id', clientSecret: 'secret', callbackUrl: 'http://callback.url', scope: ['test']});
+    pluginOAuth = new PluginOAuth();
+    pluginOAuth.init({persist: true, strategies: [{name: "facebook", clientID: "id", clientSecret: "secret", callbackUrl: "http://callback.url", scope: ["test"]}]});
   });
 
   it('should link kuzzle pipe correctly', function() {
@@ -55,8 +104,8 @@ describe('passport verify', function() {
   });
 
   it('should trigger loadScope pipe', function(done) {
-    pluginGithub.loadScope({scope: {}}, function(err, object) {
-      should(object.github[0]).equal('test');
+    pluginOAuth.loadScope({scope: {}}, function(err, object) {
+      should(object.facebook[0]).equal('test');
       done();
     });
   });

@@ -1,7 +1,5 @@
 [![Build Status](https://travis-ci.org/kuzzleio/kuzzle-plugin-auth-passport-oauth.svg?branch=master)](https://travis-ci.org/kuzzleio/kuzzle-plugin-auth-passport-oauth)
 
-![logo](https://raw.githubusercontent.com/kuzzleio/kuzzle/master/docs/images/logo.png)
-
 # Plugin Passport OAUTH Authentication
 
 This plugin provides an authentication with [passportjs strategies](http://passportjs.org/docs).

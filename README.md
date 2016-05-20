@@ -30,9 +30,8 @@ Here is an example of a configuration:
       "persist": {}
     },
     "customConfig": {
-      "strategies": [
-        {
-            "name": "facebook",
+      "strategies": {
+        "facebook": {
             "credentials": {
               "clientID": "<your-client-id>",
               "clientSecret": "<your-client-secret>",
@@ -49,8 +48,7 @@ Here is an example of a configuration:
               "user:avatar_url"
             ]
         },
-        {
-            "name": "twitter",
+        "twitter": {
             "credentials": {
               "consumerKey": "<your-client-id>",
               "consumerSecret": "<your-client-secret>",
@@ -67,8 +65,7 @@ Here is an example of a configuration:
               "user:avatar_url"
             ]
         },
-        {
-            "name": "google-oauth",
+        "google-oauth": {
             "credentials": {
               "consumerKey": "<your-client-id>",
               "consumerSecret": "<your-client-secret>",
@@ -85,8 +82,7 @@ Here is an example of a configuration:
               "user:avatar_url"
             ]
         },
-        {
-            "name": "github",
+        "github": {
             "credentials": {
               "clientID": "<your-client-id>",
               "clientSecret": "<your-client-secret>",
@@ -103,7 +99,7 @@ Here is an example of a configuration:
               "user:avatar_url"
             ]
         }
-      ],
+      },
       "defaultProfile": "default"
     }
   }

@@ -9,7 +9,7 @@ describe('pipes definition', function() {
 
   before(function () {
     pluginOAuth = new PluginOAuth();
-    pluginOAuth.init({persist: true, strategies: [{name: "facebook", clientID: "id", clientSecret: "secret", callbackUrl: "http://callback.url", scope: ['test']}]});
+    pluginOAuth.init({persist: true, strategies: {facebook: {clientID: "id", clientSecret: "secret", callbackUrl: "http://callback.url", scope: ['test']}}});
   });
 
   it('should link kuzzle pipe correctly', function() {

@@ -13,9 +13,8 @@ describe('passport verify', function() {
     Passport,
     isCalled = false,
     config = {
-      "strategies": [
-        {
-          name: "facebook",
+      "strategies": {
+        "facebook": {
           "credentials": {
             "clientID": "<your-client-id>",
             "clientSecret": "<your-client-secret>",
@@ -28,8 +27,7 @@ describe('passport verify', function() {
             "user:email"
           ]
         },
-        {
-          name: "twitter",
+        "twitter": {
           "credentials": {
             "consumerKey": "<your-client-id>",
             "consumerSecret": "<your-client-secret>",
@@ -42,8 +40,7 @@ describe('passport verify', function() {
             "user:email"
           ]
         },
-        {
-          name: "google-oauth",
+        "google-oauth": {
           "credentials": {
             "consumerKey": "<your-client-id>",
             "consumerSecret": "<your-client-secret>",
@@ -56,8 +53,7 @@ describe('passport verify', function() {
             "user:email"
           ]
         },
-        {
-          name: "github",
+        "github": {
           "credentials": {
             "clientID": "<your-client-id>",
             "clientSecret": "<your-client-secret>",
@@ -70,7 +66,7 @@ describe('passport verify', function() {
             "user:email"
           ]
         }
-      ]
+      }
     },
     context = {
       repositories: function() {
@@ -95,7 +91,7 @@ describe('passport verify', function() {
 
   before(function () {
     pluginOAuth = new PluginOAuth();
-    pluginOAuth.init({persist: true, strategies: [{name: "facebook", clientID: "id", clientSecret: "secret", callbackUrl: "http://callback.url", scope: ["test"]}]});
+    pluginOAuth.init({persist: true, strategies: {facebook: {clientID: "id", clientSecret: "secret", callbackUrl: "http://callback.url", scope: ['test']}}});
   });
 
   it('should link kuzzle pipe correctly', function() {

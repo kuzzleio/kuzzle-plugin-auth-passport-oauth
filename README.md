@@ -22,7 +22,7 @@ You can override the configuration in your `config/customPlugins.json` file in K
 Here is an example of a configuration:
 
 ```json
-  "kuzzle-plugin-auth-github": {
+  "kuzzle-plugin-auth-passport-oauth": {
     "version": "1.0.0",
     "activated": true,
     "name": "kuzzle-plugin-auth-passport-oauth",

@@ -21,7 +21,7 @@
     "name": "Kuzzle Team"
   },
   "bugs": {
-    "url": "https://github.com/kuzzleio/kuzzle-plugin-auth-github/issues"
+    "url": "https://github.com/kuzzleio/kuzzle-plugin-auth-passport-oauth/issues"
   },
   "pluginInfo": {
     "defaultConfig": {

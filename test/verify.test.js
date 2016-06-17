@@ -69,7 +69,13 @@ describe('passport verify', function() {
       }
     },
     context = {
-      repositories: function() {
+      accessors: {}
+    };
+
+  before(function () {
+    Object.defineProperty(context.accessors, 'repositories', {
+      enumerable: true,
+      get: function () {
         return {
           user: {
             ObjectConstructor: function () {
@@ -87,9 +93,7 @@ describe('passport verify', function() {
           }
         };
       }
-    };
-
-  before(function () {
+    });
     pluginOAuth = new PluginOAuth();
     pluginOAuth.init({persist: true, strategies: {facebook: {clientID: "id", clientSecret: "secret", callbackUrl: "http://callback.url", scope: ['test']}}});
   });

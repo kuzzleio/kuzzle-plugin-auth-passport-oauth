@@ -1,6 +1,6 @@
 {
   "name": "kuzzle-plugin-auth-passport-oauth",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Kuzzle plugin to log-in users through passport's strategies",
   "main": "./lib/index.js",
   "scripts": {
@@ -26,8 +26,7 @@
   "pluginInfo": {
     "defaultConfig": {
       "persist": {},
-      "strategies": {
-      }
+      "strategies": {}
     }
   },
   "license": "Apache-2.0",
@@ -43,6 +42,10 @@
     "grunt-contrib-jshint": "^0.11.3",
     "gruntify-eslint": "^1.2.0",
     "mocha": "2.3.3",
+    "passport-facebook": "^2.1.1",
+    "passport-github": "^1.1.0",
+    "passport-google-oauth": "^1.0.0",
+    "passport-twitter": "^1.0.4",
     "proxyquire": "^1.7.3",
     "rewire": "2.4.0",
     "should": "8.1.1"

@@ -73,23 +73,15 @@ describe('passport verify', function() {
     };
 
   before(function () {
-    Object.defineProperty(context.accessors, 'repositories', {
+    Object.defineProperty(context.accessors, 'users', {
       enumerable: true,
       get: function () {
         return {
-          user: {
-            ObjectConstructor: function () {
-              return {};
-            },
-            load: function () {
-              return q(null);
-            },
-            persist: function() {
-              isCalled = true;
-            },
-            hydrate: function() {
-              return q({});
-            }
+          load: function () {
+            return q(null);
+          },
+          create: function() {
+            isCalled = true;
           }
         };
       }

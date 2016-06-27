@@ -18,14 +18,16 @@ This plugin doesn't need any right.
 
 # Configuration
 
-You can override the configuration in your `config/customPlugins.json` file in Kuzzle:
+You can override the provided default configuration using [Kuzzle command-line interface](http://kuzzle.io/guide/#managing-plugins-using-the-cli)
+
+List of available configurations:
 
 | Name | Default value | Type | Description                 |
 |------|---------------|-----------|-----------------------------|
 | ``strategies`` | ``[]`` | Array | List of the providers you want to use with passport |
 | ``persist`` | ``{}`` | Object | Attributes you want to persist if the user doesn't exist |
-| ``scope`` | ``[]`` | Array | List of attributes which requires rights to get |
-| ``profile`` | ``default`` | Array | Profile of the new persisted user |
+| ``scope`` | ``[]`` | Array | List of attributes requiring specific rights to get |
+| ``profile`` | ``"default"`` | Array | Profile of the new persisted user |
 
 Here is an example of a configuration:
 

@@ -25,7 +25,7 @@
   },
   "pluginInfo": {
     "defaultConfig": {
-      "persist": {},
+      "loadedBy": "server",
       "strategies": {}
     }
   },

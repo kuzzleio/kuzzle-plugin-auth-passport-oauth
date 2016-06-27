@@ -110,7 +110,8 @@ describe('passport verify', function() {
       _json: {
         login: "login"
       }
-    }, function() {}).then(function(response) {
+    }, function(err, response) {
+      should(err).be.null();
       should(response.login).be.a.String().and.be.eql('login');
       should(isCalled).equal(true);
     });

@@ -26,7 +26,7 @@ List of available configurations:
 |------|---------------|-----------|-----------------------------|
 | ``strategies`` | ``[]`` | Array | List of the providers you want to use with passport |
 | ``persist`` | ``{}`` | Object | Attributes you want to persist if the user doesn't exist |
-| ``scope`` | ``[]`` | Array | List of attributes requiring specific rights to get |
+| ``scope`` | ``[]`` | Array | List of fields in the OAUTH 2.0 scope of access |
 | ``profile`` | ``"default"`` | Array | Profile of the new persisted user |
 
 Here is an example of a configuration:

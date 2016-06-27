@@ -12,15 +12,18 @@ describe('The plugin oauth initialization', function () {
   });
 
   it('should return an error if no config is provided', function () {
-    should(pluginOAuth.init()).be.false();
+    pluginOAuth.init();
+    should(pluginOAuth.isDummy).be.true();
   });
 
   it('should return an error if strategies config is empty', function() {
-    should(pluginOAuth.init({strategies: []})).be.false();
+    pluginOAuth.init({strategies: []});
+    should(pluginOAuth.isDummy).be.true();
   });
 
   it('should return an error if a configuration without "persist" is provided', function () {
-    should(pluginOAuth.init({strategies: ['facebook'], foo: 'bar'})).be.false();
+    pluginOAuth.init({strategies: ['facebook'], foo: 'bar'});
+    should(pluginOAuth.isDummy).be.true();
   });
 
   it('should return pluginOauth object if everything is ok', function () {

@@ -17,12 +17,7 @@ describe('The plugin oauth initialization', function () {
   });
 
   it('should return an error if strategies config is empty', function() {
-    pluginOAuth.init({strategies: []});
-    should(pluginOAuth.isDummy).be.true();
-  });
-
-  it('should return an error if a configuration without "persist" is provided', function () {
-    pluginOAuth.init({strategies: ['facebook'], foo: 'bar'});
+    pluginOAuth.init({});
     should(pluginOAuth.isDummy).be.true();
   });
 

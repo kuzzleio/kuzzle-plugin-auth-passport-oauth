@@ -1,7 +1,5 @@
 [![Build Status](https://travis-ci.org/kuzzleio/kuzzle-plugin-auth-passport-oauth.svg?branch=master)](https://travis-ci.org/kuzzleio/kuzzle-plugin-auth-passport-oauth)
 
-<p align=center> ![logo](http://kuzzle.io/guide/images/kuzzle.svg)
-
 # Kuzzle compatibility
 
 Versions 2.x of this plugin are compatible with Kuzzle v1.0.0-RC.4 and upper.

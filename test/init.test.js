@@ -1,6 +1,7 @@
 var
   should = require('should'),
   rewire = require('rewire'),
+  sinon = require('sinon'),
   PluginOAuth = rewire('../lib');
 
 describe('The plugin oauth initialization', function () {
@@ -11,14 +12,16 @@ describe('The plugin oauth initialization', function () {
     pluginOAuth = new PluginOAuth();
   });
 
-  it('should return an error if no config is provided', function () {
-    pluginOAuth.init();
-    should(pluginOAuth.isDummy).be.true();
-  });
-
   it('should return an error if strategies config is empty', function() {
-    pluginOAuth.init({});
-    should(pluginOAuth.isDummy).be.true();
+    var warnSpy = sinon.spy();
+    return PluginOAuth.__with__({
+      console: {
+        warn: warnSpy
+      }
+    })(() => {
+      pluginOAuth.init({});
+      should(warnSpy).be.calledOnce();
+    });
   });
 
   it('should return pluginOauth object if everything is ok', function () {

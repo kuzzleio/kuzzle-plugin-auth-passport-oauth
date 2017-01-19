@@ -20,7 +20,7 @@ describe('The plugin oauth initialization', function () {
       }
     })(() => {
       pluginOAuth.init({});
-      should(warnSpy).be.calledOnce();
+      should(warnSpy.calledOnce).be.true;
     });
   });
 

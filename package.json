@@ -28,8 +28,7 @@
     "passport": "0.3.2",
     "passport-oauth2": "1.x.x",
     "passport-oauth2-refresh": "1.0.0",
-    "q": "2.0.3",
-    "sinon": "^1.17.7"
+    "bluebird": "2.0.3"
   },
   "devDependencies": {
     "eslint": "1.9.0",
@@ -40,7 +39,8 @@
     "passport-twitter": "^1.0.4",
     "proxyquire": "^1.7.3",
     "rewire": "2.5.2",
-    "should": "11.1.0"
+    "should": "11.1.0",
+    "sinon": "^1.17.7"
   },
   "gitHead": "06f51a7b72065f5961f135b75d7a937b2937b83d",
   "homepage": "https://github.com/kuzzleio/kuzzle-plugin-auth-github#readme",

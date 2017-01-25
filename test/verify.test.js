@@ -4,7 +4,7 @@ var
   PluginOAuth = rewire('../lib'),
   Strategy = require('../lib/passport/strategy'),
   proxyquire = require('proxyquire'),
-  q = require('q');
+  q = require('bluebird');
 
 describe('passport verify', function() {
   var
@@ -77,7 +77,7 @@ describe('passport verify', function() {
       get: function () {
         return {
           load: function () {
-            return q(null);
+            return new q(() => {});
           },
           create: function() {
             isCalled = true;

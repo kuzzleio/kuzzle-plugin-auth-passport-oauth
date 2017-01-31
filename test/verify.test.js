@@ -3,8 +3,7 @@ var
   rewire = require('rewire'),
   PluginOAuth = rewire('../lib'),
   Strategy = require('../lib/passport/strategy'),
-  proxyquire = require('proxyquire'),
-  q = require('bluebird');
+  proxyquire = require('proxyquire');
 
 describe('passport verify', function() {
   var
@@ -77,7 +76,7 @@ describe('passport verify', function() {
       get: function () {
         return {
           load: function () {
-            return new q(() => {});
+            return Promise.resolve({});
           },
           create: function() {
             isCalled = true;

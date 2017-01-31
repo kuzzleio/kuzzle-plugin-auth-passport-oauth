@@ -27,8 +27,7 @@
   "dependencies": {
     "passport": "0.3.2",
     "passport-oauth2": "1.x.x",
-    "passport-oauth2-refresh": "1.0.0",
-    "bluebird": "2.0.3"
+    "passport-oauth2-refresh": "1.0.0"
   },
   "devDependencies": {
     "eslint": "1.9.0",

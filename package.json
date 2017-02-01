@@ -4,7 +4,7 @@
   "description": "Kuzzle plugin to log-in users through passport's strategies",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "grunt && mocha"
+    "test": "eslint lib && mocha"
   },
   "repository": {
     "type": "git",
@@ -23,31 +23,23 @@
   "bugs": {
     "url": "https://github.com/kuzzleio/kuzzle-plugin-auth-github/issues"
   },
-  "pluginInfo": {
-    "defaultConfig": {
-      "strategies": {}
-    }
-  },
   "license": "Apache-2.0",
   "dependencies": {
     "passport": "0.3.2",
     "passport-oauth2": "1.x.x",
-    "passport-oauth2-refresh": "1.0.0",
-    "q": "2.0.3"
+    "passport-oauth2-refresh": "1.0.0"
   },
   "devDependencies": {
     "eslint": "1.9.0",
-    "grunt": "^0.4.5",
-    "grunt-contrib-jshint": "^0.11.3",
-    "gruntify-eslint": "^1.2.0",
     "mocha": "2.3.3",
     "passport-facebook": "^2.1.1",
     "passport-github": "^1.1.0",
     "passport-google-oauth": "^1.0.0",
     "passport-twitter": "^1.0.4",
     "proxyquire": "^1.7.3",
-    "rewire": "2.4.0",
-    "should": "8.1.1"
+    "rewire": "2.5.2",
+    "should": "11.1.0",
+    "sinon": "^1.17.7"
   },
   "gitHead": "06f51a7b72065f5961f135b75d7a937b2937b83d",
   "homepage": "https://github.com/kuzzleio/kuzzle-plugin-auth-github#readme",

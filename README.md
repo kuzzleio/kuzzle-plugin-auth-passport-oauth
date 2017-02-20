@@ -2,9 +2,9 @@
 
 # Kuzzle compatibility
 
-Versions 2.x of this plugin are compatible with Kuzzle v1.0.0-RC.4 and upper.
+Versions 3.x of this plugin are compatible with Kuzzle v1.0.0-RC.8 and upper.
 
-For older versions of Kuzzle, install v1.x versions of this plugin instead.
+For older versions of Kuzzle, install v1.x or v2.x versions of this plugin instead.
 
 # Plugin Passport OAUTH Authentication
 
@@ -31,7 +31,7 @@ Here is an example of a configuration:
 
 ```json
   "kuzzle-plugin-auth-passport-oauth": {
-    "version": "1.0.0",
+    "version": "3.0.0",
     "activated": true,
     "name": "kuzzle-plugin-auth-passport-oauth",
     "defaultConfig": {

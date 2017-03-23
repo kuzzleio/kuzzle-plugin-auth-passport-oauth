@@ -10,10 +10,6 @@ For older versions of Kuzzle, install v1.x or v2.x versions of this plugin inste
 
 This plugin provides an authentication with [passportjs strategies](http://passportjs.org/docs).
 
-# Manifest
-
-This plugin doesn't need any right.
-
 # Configuration
 
 You can override the provided default configuration using [Kuzzle command-line interface](http://kuzzle.io/guide/#managing-plugins-using-the-cli)
@@ -30,6 +26,7 @@ List of available configurations:
 Here is an example of a configuration:
 
 ```json
+{
   "kuzzle-plugin-auth-passport-oauth": {
     "version": "3.0.0",
     "activated": true,
@@ -111,6 +108,7 @@ Here is an example of a configuration:
       "defaultProfile": "default"
     }
   }
+}
 ```
 
 # Usage

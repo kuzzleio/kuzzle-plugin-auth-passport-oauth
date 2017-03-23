@@ -1,4 +1,4 @@
-var
+const
   should = require('should'),
   rewire = require('rewire'),
   PluginOAuth = rewire('../lib'),
@@ -6,10 +6,11 @@ var
   proxyquire = require('proxyquire');
 
 describe('passport verify', function() {
-  var
+  let
     pluginOAuth,
     Passport,
-    isCalled = false,
+    isCalled = false;
+  const
     config = {
       "strategies": {
         "facebook": {
@@ -76,10 +77,11 @@ describe('passport verify', function() {
       get: function () {
         return {
           load: function () {
-            return Promise.resolve({});
+            return Promise.resolve(null);
           },
           create: function() {
             isCalled = true;
+            return Promise.resolve();
           }
         };
       }
@@ -98,21 +100,26 @@ describe('passport verify', function() {
     pluginOAuth.init({persist: true, strategies: {facebook: {clientID: "id", clientSecret: "secret", callbackUrl: "http://callback.url", scope: ['test']}}});
   });
 
-  it('should persist and load a new user', function() {
-    var strategy;
+  it('should persist and load a new user', done => {
+    let strategy;
 
     Passport = proxyquire('passport', {});
     strategy = new Strategy(context, config);
     strategy.init();
 
     strategy.verify("accessToken", "refreshToken", {
+      provider: 'facebook',
       _json: {
         login: "login"
       }
     }, function(err, response) {
-      should(err).be.null();
+      if (err) {
+        done(err);
+      }
+
       should(response.login).be.a.String().and.be.eql('login');
       should(isCalled).equal(true);
+      done();
     });
   });
 });

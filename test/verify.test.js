@@ -87,13 +87,9 @@ describe('passport verify', function() {
       }
     });
 
-    Object.defineProperty(context.accessors, 'passport', {
+    Object.defineProperty(context.accessors, 'registerStrategy', {
       enumerable: true,
-      get: function () {
-        return {
-          use: function () {}
-        };
-      }
+      get: () => () => {}
     });
 
     pluginOAuth = new PluginOAuth();
@@ -107,7 +103,7 @@ describe('passport verify', function() {
     strategy = new Strategy(context, config);
     strategy.init();
 
-    strategy.verify("accessToken", "refreshToken", {
+    strategy.verify(null, "accessToken", "refreshToken", {
       provider: 'facebook',
       _json: {
         login: "login"

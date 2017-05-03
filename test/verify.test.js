@@ -52,4 +52,19 @@ describe('#verify', () => {
     });
     return should(promise).be.fulfilledWith('42');
   });
+
+  it('should resolve with the new user id and persist it with some mapping', (done) => {
+    pluginOauth.getProviderRepository = sandbox.stub().returns({get: sandbox.stub().returns(Promise.resolve(null))});
+    pluginOauth.context.constructors.Request = sandbox.stub().callsFake((request, req) => {
+      should(req.body.content.nameInKuzzle).be.equal('Displayed name');
+      done();
+    });
+    pluginOauth.config.strategies.facebook.persist = ['name'];
+    pluginOauth.config.strategies.facebook.mapToKuzzle = {
+      nameInKuzzle: 'displayName'
+    };
+    const promise = pluginOauth.verify({}, null, null, {provider: 'facebook', _json: {id: '42', name: 'foo', displayName: 'Displayed name'}});
+
+    return should(promise).be.fulfilledWith('42');
+  });
 });

@@ -47,6 +47,9 @@ Here is an example of a configuration:
                 "email",
                 "public_profile"
             ],
+            "mapToKuzzle": {
+              "userMail": "email"
+            },
             "useAsId": "id"
         }
     },

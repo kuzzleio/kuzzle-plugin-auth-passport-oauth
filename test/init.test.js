@@ -1,29 +1,40 @@
 const
   should = require('should'),
-  rewire = require('rewire'),
-  sinon = require('sinon'),
-  PluginOAuth = rewire('../lib');
-
-describe('The plugin oauth initialization', function () {
-  let pluginOAuth;
-
-  before(function () {
-    pluginOAuth = new PluginOAuth();
+  proxyquire = require('proxyquire'),
+  sandbox = require('sinon').sandbox.create(),
+  PluginOAuth = proxyquire('../lib', {
+    'passport-oauth2-refresh': {
+      use: sandbox.stub()
+    }
   });
 
-  it('should return an error if strategies config is empty', function() {
-    const warnSpy = sinon.spy();
-    return PluginOAuth.__with__({
-      console: {
-        warn: warnSpy
-      }
-    })(() => {
-      pluginOAuth.init({});
-      should(warnSpy.calledOnce).be.true();
-    });
+describe('#init', function () {
+  let
+    pluginOauth,
+    pluginContext = require('./mock/pluginContext.mock.js');
+
+  beforeEach(function () {
+    sandbox.reset();
+    pluginOauth = new PluginOAuth();
   });
 
-  it('should return pluginOauth object if everything is ok', function () {
-    should(pluginOAuth.init({persist: true, strategies: [{name: "facebook", clientID: "id", clientSecret: "secret", callbackUrl: "http://callback.url"}]})).be.Object();
+  it('should return a Promise', function () {
+    should(pluginOauth.init(null, pluginContext)).be.a.Promise();
+  });
+
+  it('should initialize all strategies', function (done) {
+    should(pluginOauth.strategies).not.be.ok();
+
+    pluginOauth.init(null, pluginContext)
+      .then(() => {
+        should(pluginOauth.strategies).be.Object();
+        done();
+      });
+  });
+
+  it('should have a getUserRepository method returning an object', function() {
+    pluginOauth.init(null, pluginContext);
+
+    should(pluginOauth.getProviderRepository('provider')).be.an.Object();
   });
 });

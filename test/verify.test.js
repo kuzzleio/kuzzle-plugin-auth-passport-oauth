@@ -19,7 +19,7 @@ describe('#verify', () => {
       strategies: {
         facebook: {
           persist: [],
-          useAsId: 'id'
+          identifierAttribute: 'id'
         }
       }
     }
@@ -34,7 +34,7 @@ describe('#verify', () => {
     pluginOauth.getProviderRepository = sandbox.stub().returns({get: sandbox.stub().returns(Promise.resolve(null))});
     const promise = pluginOauth.verify(null, null, null, {provider: 'facebook', _json: {id: '42'}});
 
-    promise.then(() => {
+    return promise.then(() => {
       should(pluginOauth.context.accessors.execute.called).be.false();
       done();
     });
@@ -56,12 +56,12 @@ describe('#verify', () => {
   it('should resolve with the new user id and persist it with some mapping', (done) => {
     pluginOauth.getProviderRepository = sandbox.stub().returns({get: sandbox.stub().returns(Promise.resolve(null))});
     pluginOauth.context.constructors.Request = sandbox.stub().callsFake((request, req) => {
-      should(req.body.content.nameInKuzzle).be.equal('Displayed name');
+      should(req.body.content.kuzzleAttributesMapping).be.equal('Displayed name');
       done();
     });
     pluginOauth.config.strategies.facebook.persist = ['name'];
-    pluginOauth.config.strategies.facebook.mapToKuzzle = {
-      nameInKuzzle: 'displayName'
+    pluginOauth.config.strategies.facebook.kuzzleAttributesMapping = {
+      kuzzleAttributesMapping: 'displayName'
     };
     const promise = pluginOauth.verify({}, null, null, {provider: 'facebook', _json: {id: '42', name: 'foo', displayName: 'Displayed name'}});
 

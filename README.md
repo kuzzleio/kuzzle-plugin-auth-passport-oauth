@@ -22,9 +22,9 @@ List of available configurations:
 | ``credentials`` | ``{}`` | Object | Credentials provided by the provider |
 | ``persist`` | ``{}`` | Object | Attributes you want to persist if the user doesn't exist |
 | ``scope`` | ``[]`` | Array | List of fields in the OAUTH 2.0 scope of access |
-| ``useAdId`` | | String | Attribute from the profile of the provider to use as Id if you want to persist the user in Kuzzle |
+| ``identifierAttribute`` | | String | Attribute from the profile of the provider to use as Id if you want to persist the user in Kuzzle |
 | ``defaultProfile`` | ``"default"`` | Array | Profiles of the new persisted user |
-| ``mapToKuzzle`` | ```` | Object | Mapping of attributes to persist in the user persisted in Kuzzle |
+| ``kuzzleAttributesMapping`` | ```` | Object | Mapping of attributes to persist in the user persisted in Kuzzle |
 
 Here is an example of a configuration:
 
@@ -47,10 +47,10 @@ Here is an example of a configuration:
                 "email",
                 "public_profile"
             ],
-            "mapToKuzzle": {
+            "kuzzleAttributesMapping": {
               "userMail": "email"
             },
-            "useAsId": "id"
+            "identifierAttribute": "id"
         }
     },
     "defaultProfiles": [

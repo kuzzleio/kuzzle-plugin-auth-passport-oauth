@@ -2,10 +2,12 @@
 node_modules
 npm-debug.log*
 .node_history
+
 # Exclude coverage report
 !/coverage/
 /coverage/*
 !/coverage/scripts
+.nyc_output/
 
 # IDE
 .idea

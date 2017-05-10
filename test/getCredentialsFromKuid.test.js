@@ -3,7 +3,7 @@ const
   PluginOAuth = require('../lib'),
   sandbox = require('sinon').sandbox.create();
 
-describe('#getCredentialsFromUserId', () => {
+describe('#getCredentialsFromKuid', () => {
   let
     pluginOauth;
   
@@ -17,7 +17,7 @@ describe('#getCredentialsFromUserId', () => {
       search: sandbox.stub().returns(Promise.resolve({total: 0}))
     });
 
-    return should(pluginOauth.getCredentialsFromUserId(null, null)).be.fulfilledWith(null);
+    return should(pluginOauth.getCredentialsFromKuid(null, null)).be.fulfilledWith(null);
   });
 
   it('should resolve with a null result', () => {
@@ -25,6 +25,6 @@ describe('#getCredentialsFromUserId', () => {
       search: sandbox.stub().returns(Promise.resolve({total: 1, hits: [{id: 'foo'}]}))
     });
 
-    return should(pluginOauth.getCredentialsFromUserId(null, null)).be.fulfilledWith({id: 'foo'});
+    return should(pluginOauth.getCredentialsFromKuid(null, null)).be.fulfilledWith({id: 'foo'});
   });
 });

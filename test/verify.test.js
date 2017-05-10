@@ -12,13 +12,13 @@ describe('#verify', () => {
     sandbox.reset();
     pluginOauth = new PluginOAuth();
     pluginOauth.getProviderRepository = sandbox.stub();
-    pluginOauth.getCredentialsFromUserId = sandbox.stub().returns(Promise.resolve({foo: 'bar'}));
+    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve({foo: 'bar'}));
     pluginOauth.context = pluginContext;
 
     pluginOauth.config = {
       strategies: {
         facebook: {
-          persist: [],
+          persist: ['name'],
           identifierAttribute: 'id'
         }
       }
@@ -26,23 +26,12 @@ describe('#verify', () => {
   });
 
   it('should resolve an existing user', () => {
-    pluginOauth.getProviderRepository = sandbox.stub().returns({get: sandbox.stub().returns(Promise.resolve({userId: '24'}))});
-    return should(pluginOauth.verify(null, null, null, {provider: 'facebook', _json: {id: '42'}})).be.fulfilledWith('24');
-  });
-
-  it('should resolve with the new user id and persist nothing', (done) => {
-    pluginOauth.getProviderRepository = sandbox.stub().returns({get: sandbox.stub().returns(Promise.resolve(null))});
-    const promise = pluginOauth.verify(null, null, null, {provider: 'facebook', _json: {id: '42'}});
-
-    return promise.then(() => {
-      should(pluginOauth.context.accessors.execute.called).be.false();
-      done();
-    });
-    return should(promise).be.fulfilledWith('42');
+    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve({kuid: '24'}));
+    return should(pluginOauth.verify(null, null, null, {provider: 'facebook', _json: {kuid: '42'}})).be.fulfilledWith('24');
   });
 
   it('should resolve with the new user id and persist it', (done) => {
-    pluginOauth.getProviderRepository = sandbox.stub().returns({get: sandbox.stub().returns(Promise.resolve(null))});
+    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve(null));
     pluginOauth.config.strategies.facebook.persist = ['name'];
     const promise = pluginOauth.verify({}, null, null, {provider: 'facebook', _json: {id: '42', name: 'foo'}});
 
@@ -54,7 +43,7 @@ describe('#verify', () => {
   });
 
   it('should resolve with the new user id and persist it with some mapping', (done) => {
-    pluginOauth.getProviderRepository = sandbox.stub().returns({get: sandbox.stub().returns(Promise.resolve(null))});
+    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve(null));
     pluginOauth.context.constructors.Request = sandbox.stub().callsFake((request, req) => {
       should(req.body.content.kuzzleAttributesMapping).be.equal('Displayed name');
       done();

@@ -16,7 +16,7 @@ describe('#delete', () => {
   });
 
   it('should reject if the user doesn\'t exists', () => {
-    pluginOauth.getCredentialsFromUserId = sandbox.stub().returns(Promise.resolve(null));
+    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve(null));
     return should(pluginOauth.delete()).be.rejectedWith('A strategy does not exist for this user.');
   });
 
@@ -24,7 +24,7 @@ describe('#delete', () => {
     const del = sandbox.stub();
 
     pluginOauth.getProviderRepository = sandbox.stub().returns({delete: del});
-    pluginOauth.getCredentialsFromUserId = sandbox.stub().returns(Promise.resolve({_id: 'foo'}));
+    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve({_id: 'foo'}));
     pluginOauth.delete()
       .then(() => {
         should(del.calledOnce).be.true();

@@ -16,7 +16,7 @@ describe('#update', () => {
   });
 
   it('should reject if the user doesn\'t exists', () => {
-    pluginOauth.getCredentialsFromUserId = sandbox.stub().returns(Promise.resolve(null));
+    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve(null));
     return should(pluginOauth.update()).be.rejectedWith('A strategy does not exist for this user.');
   });
 
@@ -24,7 +24,7 @@ describe('#update', () => {
     const update = sandbox.stub();
 
     pluginOauth.getProviderRepository = sandbox.stub().returns({update});
-    pluginOauth.getCredentialsFromUserId = sandbox.stub().returns(Promise.resolve({_id: 'foo'}));
+    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve({_id: 'foo'}));
     pluginOauth.update()
       .then(() => {
         should(update.calledOnce).be.true();

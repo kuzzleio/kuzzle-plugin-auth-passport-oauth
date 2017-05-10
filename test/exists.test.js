@@ -15,12 +15,12 @@ describe('#exists', () => {
   });
 
   it('should resolve true if user exists', () => {
-    pluginOauth.getCredentialsFromUserId = sandbox.stub().returns(Promise.resolve({_id: '42'}));
+    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve({_id: '42'}));
     return should(pluginOauth.exists()).be.fulfilledWith(true);
   });
 
   it('should resolve false if user doesn\'t exists', () => {
-    pluginOauth.getCredentialsFromUserId = sandbox.stub().returns(Promise.resolve(null));
+    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve(null));
     return should(pluginOauth.exists()).be.fulfilledWith(false);
   });
 });

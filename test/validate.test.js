@@ -22,15 +22,15 @@ describe('#validate', () => {
     return should(pluginOauth.validate(null, {_id: 'foo'})).be.fulfilledWith(true);
   });
 
-  it('should reject a promise if the userId is not equal to the fetched user', () => {
-    const get = sandbox.stub().returns(Promise.resolve({userId: "42"}));
+  it('should reject a promise if the kuid is not equal to the fetched user', () => {
+    const get = sandbox.stub().returns(Promise.resolve({kuid: "42"}));
 
     pluginOauth.getProviderRepository = sandbox.stub().returns({get});
     return should(pluginOauth.validate(null, {_id: "0"}, "0")).be.rejectedWith(`Login '0' is already used.`);
   });
 
   it('should resolve true', () => {
-    const get = sandbox.stub().returns(Promise.resolve({userId: '42'}));
+    const get = sandbox.stub().returns(Promise.resolve({kuid: '42'}));
 
     pluginOauth.getProviderRepository = sandbox.stub().returns({get});
     return should(pluginOauth.validate(null, {_id: '42'}, '42')).be.fulfilledWith(true);

@@ -1,29 +1,55 @@
 const
   should = require('should'),
-  rewire = require('rewire'),
-  sinon = require('sinon'),
-  PluginOAuth = rewire('../lib');
-
-describe('The plugin oauth initialization', function () {
-  let pluginOAuth;
-
-  before(function () {
-    pluginOAuth = new PluginOAuth();
+  proxyquire = require('proxyquire'),
+  sandbox = require('sinon').sandbox.create(),
+  PluginOAuth = proxyquire('../lib', {
+    'passport-oauth2-refresh': {
+      use: sandbox.stub()
+    }
   });
 
-  it('should return an error if strategies config is empty', function() {
-    const warnSpy = sinon.spy();
-    return PluginOAuth.__with__({
-      console: {
-        warn: warnSpy
+describe('#init', () => {
+  let
+    pluginOauth,
+    pluginContext = require('./mock/pluginContext.mock.js'),
+    config = {
+      strategies: {
+        facebook: {
+          credentials: {
+            clientId: 'clientId',
+            secret: 'secret'
+          }
+        }
       }
-    })(() => {
-      pluginOAuth.init({});
-      should(warnSpy.calledOnce).be.true();
-    });
+    };
+
+  beforeEach(() => {
+    sandbox.reset();
+    pluginOauth = new PluginOAuth();
   });
 
-  it('should return pluginOauth object if everything is ok', function () {
-    should(pluginOAuth.init({persist: true, strategies: [{name: "facebook", clientID: "id", clientSecret: "secret", callbackUrl: "http://callback.url"}]})).be.Object();
+  it('should reject if no credentials are specified', () => {
+    return should(pluginOauth.init({strategies: {facebook: {}}}, pluginContext)).be.rejectedWith(`Error loading strategy [facebook]: no credentials provided`);
+  });
+
+  it('should reject if the strategy does not exists', () => {
+    return should(pluginOauth.init({
+      strategies: {
+        fake: {
+          credentials: {
+            clientId: 'clientId',
+            secret: 'secret'
+          }
+        }
+      }
+    }, pluginContext)).be.rejectedWith(`Error loading strategy [fake]: Cannot find module 'passport-fake'`);
+  });
+
+  it('should initialize all strategies', done => {
+    pluginOauth.init(config, pluginContext)
+      .then(() => {
+        should(pluginOauth.strategies).be.Object();
+        done();
+      });
   });
 });

@@ -11,7 +11,7 @@ module.exports = {
     storage: {
       bootstrap: sinon.stub().returns(Promise.resolve())
     },
-    execute: sinon.stub().returns(Promise.resolve())
+    execute: sinon.stub().returns(Promise.resolve({result: {_id: '42'}}))
   },
   errors: {
     BadRequestError: defaultError,

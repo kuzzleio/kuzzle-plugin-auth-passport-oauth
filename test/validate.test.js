@@ -26,7 +26,7 @@ describe('#validate', () => {
     const get = sandbox.stub().returns(Promise.resolve({kuid: "42"}));
 
     pluginOauth.getProviderRepository = sandbox.stub().returns({get});
-    return should(pluginOauth.validate(null, {_id: "0"}, "0")).be.rejectedWith(`Login '0' is already used.`);
+    return should(pluginOauth.validate(null, {_id: "0"}, "0")).be.rejectedWith(`Id '0' is already used.`);
   });
 
   it('should resolve true', () => {

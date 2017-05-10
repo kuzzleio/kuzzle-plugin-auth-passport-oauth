@@ -21,7 +21,7 @@ describe('#getInfo', () => {
   });
 
   it('should resolve the info without _id', () => {
-    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve({_id: '42', foo: 'bar'}));
+    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve({foo: 'bar'}));
     return should(pluginOauth.getInfo(null, {_id: 'foo'})).be.fulfilledWith({foo: 'bar'});
   });
 });

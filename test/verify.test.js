@@ -27,7 +27,7 @@ describe('#verify', () => {
 
   it('should resolve an existing user', () => {
     pluginOauth.getProviderRepository = sandbox.stub().returns({get: sandbox.stub().returns(Promise.resolve({kuid: '24'}))});
-    return should(pluginOauth.verify(null, null, null, {provider: 'facebook', _json: {id: '42'}})).be.fulfilledWith('24');
+    return should(pluginOauth.verify(null, null, null, {provider: 'facebook', _json: {id: '42'}})).be.fulfilledWith({kuid: '24', message: null});
   });
 
   it('should resolve with the new user id and persist it', (done) => {
@@ -54,6 +54,6 @@ describe('#verify', () => {
     };
     const promise = pluginOauth.verify({}, null, null, {provider: 'facebook', _json: {id: '42', name: 'foo', displayName: 'Displayed name'}});
 
-    return should(promise).be.fulfilledWith('42');
+    return should(promise).be.fulfilledWith({kuid: '42', message: null});
   });
 });

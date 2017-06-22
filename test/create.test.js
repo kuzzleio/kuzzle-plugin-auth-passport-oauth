@@ -13,6 +13,7 @@ const
     pluginOauth = new PluginOAuth();
     pluginOauth.getProviderRepository = sandbox.stub();
     pluginOauth.context = pluginContext;
+    pluginOauth.config = {strategies: {local: {identifierAttribute: '_id'}}};
   });
 
   it('should reject if the user already exists', () => {
@@ -25,7 +26,7 @@ const
 
     pluginOauth.getProviderRepository = sandbox.stub().returns({create});
     pluginOauth.exists = sandbox.stub().returns(Promise.resolve(false));
-    pluginOauth.create(null, {foo: 'bar'})
+    return pluginOauth.create(null, {local: {identifierAttribute: '_id'}}, '42', 'local')
       .then(() => {
         should(create.calledOnce).be.true();
         done();

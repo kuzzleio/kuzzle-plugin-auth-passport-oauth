@@ -39,7 +39,7 @@ describe('#verify', () => {
       should(pluginOauth.context.accessors.execute.called).be.true();
       done();
     });
-    return should(promise).be.fulfilledWith('42');
+    return should(promise).be.fulfilledWith({kuid: '42', message: null});
   });
 
   it('should resolve with the new user id and persist it with some mapping', (done) => {

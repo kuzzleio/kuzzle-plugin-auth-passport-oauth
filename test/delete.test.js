@@ -20,15 +20,12 @@ describe('#delete', () => {
     return should(pluginOauth.delete()).be.rejectedWith('A strategy does not exist for this user.');
   });
 
-  it('should delete a user', (done) => {
+  it('should delete a user', () => {
     const del = sandbox.stub();
 
     pluginOauth.getProviderRepository = sandbox.stub().returns({delete: del});
     pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve({_id: 'foo'}));
-    pluginOauth.delete()
-      .then(() => {
-        should(del.calledOnce).be.true();
-        done();
-      })
+    return pluginOauth.delete()
+      .then(() => should(del.calledOnce).be.true());
   });
 });

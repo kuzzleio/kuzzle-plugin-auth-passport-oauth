@@ -1,6 +1,6 @@
 const
   sinon = require('sinon'),
-  defaultError = sinon.stub().callsFake(message => {return {message}});
+  defaultError = sinon.stub().callsFake(message => ({message}));
 
 module.exports = {
   constructors: {

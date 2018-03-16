@@ -3,10 +3,10 @@ const
   PluginOAuth = require('../lib'),
   sandbox = require('sinon').sandbox.create();
 
-  describe('#create', () => {
-    let
-      pluginOauth,
-      pluginContext = require('./mock/pluginContext.mock.js');
+describe('#create', () => {
+  let
+    pluginOauth,
+    pluginContext = require('./mock/pluginContext.mock.js');
 
   beforeEach(() => {
     sandbox.reset();
@@ -21,7 +21,7 @@ const
     return should(pluginOauth.create()).be.rejectedWith('A strategy already exists for this user.');
   });
 
-  it('should create a user', (done) => {
+  it('should create a user', () => {
     const create = sandbox.stub();
 
     pluginOauth.getProviderRepository = sandbox.stub().returns({create});
@@ -29,7 +29,6 @@ const
     return pluginOauth.create(null, {local: {identifierAttribute: '_id'}}, '42', 'local')
       .then(() => {
         should(create.calledOnce).be.true();
-        done();
       });
   });
 });

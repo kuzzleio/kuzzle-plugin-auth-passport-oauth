@@ -22,7 +22,7 @@ describe('#verify', () => {
           identifierAttribute: 'id'
         }
       }
-    }
+    };
   });
 
   it('should resolve an existing user', () => {
@@ -30,30 +30,44 @@ describe('#verify', () => {
     return should(pluginOauth.verify(null, null, null, {provider: 'facebook', _json: {id: '42'}})).be.fulfilledWith({kuid: '24', message: null});
   });
 
-  it('should resolve with the new user id and persist it', (done) => {
+  it('should resolve with the new user id and persist it', () => {
     pluginOauth.getProviderRepository = sandbox.stub().returns({get: sandbox.stub().returns(Promise.resolve(null))});
     pluginOauth.config.strategies.facebook.persist = ['name'];
-    const promise = pluginOauth.verify({}, null, null, {provider: 'facebook', _json: {id: '42', name: 'foo'}});
 
-    promise.then(() => {
-      should(pluginOauth.context.accessors.execute.called).be.true();
-      done();
-    });
-    return should(promise).be.fulfilledWith({kuid: '42', message: null});
+    return pluginOauth.verify({}, null, null, {provider: 'facebook', _json: {id: '42', name: 'foo'}})
+      .then(result => {
+        should(result).match({kuid: '42', message: null});
+        should(pluginOauth.context.accessors.execute.called).be.true();
+      });
   });
 
   it('should resolve with the new user id and persist it with some mapping', (done) => {
+    let status = 'pending';
+
     pluginOauth.getProviderRepository = sandbox.stub().returns({get: sandbox.stub().returns(Promise.resolve(null))});
     pluginOauth.context.constructors.Request = sandbox.stub().callsFake((request, req) => {
-      should(req.body.content.kuzzleAttributesMapping).be.equal('Displayed name');
-      done();
+      try {
+        should(req.body.content.kuzzleAttributesMapping).be.equal('Displayed name');
+        status = 'verified';
+      }
+      catch (e) {
+        status = 'error: ' + e;
+      }
     });
+
     pluginOauth.config.strategies.facebook.persist = ['name'];
     pluginOauth.config.strategies.facebook.kuzzleAttributesMapping = {
       kuzzleAttributesMapping: 'displayName'
     };
-    const promise = pluginOauth.verify({}, null, null, {provider: 'facebook', _json: {id: '42', name: 'foo', displayName: 'Displayed name'}});
 
-    return should(promise).be.fulfilledWith({kuid: '42', message: null});
+    pluginOauth.verify({}, null, null, {provider: 'facebook', _json: {id: '42', name: 'foo', displayName: 'Displayed name'}})
+      .then(() => {
+        if (status === 'verified') {
+          done();
+        } else {
+          done('Unexpected test result: ' + status);
+        }
+      })
+      .catch(e => done(e));
   });
 });

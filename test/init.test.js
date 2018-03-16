@@ -29,7 +29,7 @@ describe('#init', () => {
   });
 
   it('should reject if no credentials are specified', () => {
-    return should(pluginOauth.init({strategies: {facebook: {}}}, pluginContext)).be.rejectedWith(`Error loading strategy [facebook]: no credentials provided`);
+    return should(pluginOauth.init({strategies: {facebook: {}}}, pluginContext)).be.rejectedWith('Error loading strategy [facebook]: no credentials provided');
   });
 
   it('should reject if the strategy does not exists', () => {
@@ -42,7 +42,7 @@ describe('#init', () => {
           }
         }
       }
-    }, pluginContext)).be.rejectedWith(`Error loading strategy [fake]: Cannot find module 'passport-fake'`);
+    }, pluginContext)).be.rejectedWith('Error loading strategy [fake]: Cannot find module \'passport-fake\'');
   });
 
   it('should initialize all strategies', done => {

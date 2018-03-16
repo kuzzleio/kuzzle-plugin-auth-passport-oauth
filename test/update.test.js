@@ -20,15 +20,14 @@ describe('#update', () => {
     return should(pluginOauth.update()).be.rejectedWith('A strategy does not exist for this user.');
   });
 
-  it('should update a user', (done) => {
+  it('should update a user', () => {
     const update = sandbox.stub();
 
     pluginOauth.getProviderRepository = sandbox.stub().returns({update});
     pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve({_id: 'foo'}));
-    pluginOauth.update()
+    return pluginOauth.update()
       .then(() => {
         should(update.calledOnce).be.true();
-        done();
-      })
+      });
   });
 });

@@ -4,9 +4,7 @@ const
   sandbox = require('sinon').sandbox.create();
 
 describe('#exists', () => {
-  let
-    pluginOauth,
-    pluginContext = require('./mock/pluginContext.mock.js');
+  let pluginOauth;
 
   beforeEach(() => {
     sandbox.reset();

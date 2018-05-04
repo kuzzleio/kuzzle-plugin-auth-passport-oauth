@@ -1,11 +1,5 @@
 [![Build Status](https://travis-ci.org/kuzzleio/kuzzle-plugin-auth-passport-oauth.svg?branch=master)](https://travis-ci.org/kuzzleio/kuzzle-plugin-auth-passport-oauth)
 
-# Kuzzle compatibility
-
-Versions 4.x of this plugin are compatible with Kuzzle v1.0.0-RC10 and upper.
-
-For older versions of Kuzzle, install v1.x or v2.x versions of this plugin instead.
-
 # Plugin Passport OAUTH Authentication
 
 This plugin provides an authentication with [passportjs strategies](http://passportjs.org/docs).
@@ -69,9 +63,3 @@ See [Kuzzle API Documentation](http://kuzzleio.github.io/kuzzle-api-documentatio
 
 See [Kuzzle documentation](http://docs.kuzzle.io/plugin-reference/#plugin-creation-prerequisites) about plugin for more information about how to create your own plugin.
 
-# About Kuzzle
-
-For UI and linked objects developers, [Kuzzle](https://github.com/kuzzleio/kuzzle) is an open-source solution that handles all the data management
-(CRUD, real-time storage, search, high-level features, etc).
-
-[Kuzzle](https://github.com/kuzzleio/kuzzle) features are accessible through a secured API. It can be used through a large choice of protocols such as REST, Websocket or Message Queuing protocols.

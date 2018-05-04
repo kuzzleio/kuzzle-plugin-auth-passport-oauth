@@ -18,7 +18,7 @@ List of available configurations:
 
 | Name | Default value | Type | Description                 |
 |------|---------------|-----------|-----------------------------|
-| ``strategies`` | ``[]`` | Array | List of the providers you want to use with passport |
+| ``strategies`` | ``{}`` | Object | List of the providers you want to use with passport |
 | ``credentials`` | ``{}`` | Object | Credentials provided by the provider |
 | ``persist`` | ``{}`` | Object | Attributes you want to persist if the user doesn't exist |
 | ``scope`` | ``[]`` | Array | List of fields in the OAUTH 2.0 scope of access |

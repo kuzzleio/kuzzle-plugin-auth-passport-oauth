@@ -12,7 +12,7 @@ This plugin provides an authentication with [passportjs strategies](http://passp
 
 # Configuration
 
-To edit the configuration of a plugin see [custom plugin configuration](http://docs.kuzzle.io/plugin-reference/#custom-plugin-configuration).
+To edit the configuration of a plugin see [custom plugin configuration](https://docs.kuzzle.io/plugins-reference/plugins-creation-prerequisites/#custom-plugin-configuration).
 
 List of available configurations:
 

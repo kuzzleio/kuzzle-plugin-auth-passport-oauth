@@ -29,6 +29,7 @@
     "passport-facebook": "^2.1.1",
     "passport-github": "^1.1.0",
     "passport-google-oauth": "^1.0.0",
+    "passport-google-oauth20": "^1.0.0",
     "passport-oauth2": "1.x.x",
     "passport-oauth2-refresh": "1.0.0",
     "passport-twitter": "^1.0.4"

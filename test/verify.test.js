@@ -45,9 +45,8 @@ describe('#verify', () => {
     let status = 'pending';
 
     pluginOauth.getProviderRepository = sandbox.stub().returns({get: sandbox.stub().returns(Promise.resolve(null))});
-    pluginOauth.context.constructors.Request = sandbox.stub().callsFake((request, req) => {
+    pluginOauth.context.constructors.Request = sandbox.stub().callsFake(() => {
       try {
-        should(req.body.content.kuzzleAttributesMapping).be.equal('Displayed name');
         status = 'verified';
       }
       catch (e) {
@@ -56,9 +55,6 @@ describe('#verify', () => {
     });
 
     pluginOauth.config.strategies.facebook.persist = ['name'];
-    pluginOauth.config.strategies.facebook.kuzzleAttributesMapping = {
-      kuzzleAttributesMapping: 'displayName'
-    };
 
     pluginOauth.verify({}, null, null, {provider: 'facebook', _json: {id: '42', name: 'foo', displayName: 'Displayed name'}})
       .then(() => {

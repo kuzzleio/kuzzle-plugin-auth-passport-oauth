@@ -1,7 +1,7 @@
 const
   should = require('should'),
   PluginOAuth = require('../lib'),
-  sandbox = require('sinon').sandbox.create();
+  sinon = require('sinon');
 
 describe('#verify', () => {
   let
@@ -9,10 +9,10 @@ describe('#verify', () => {
     pluginContext = require('./mock/pluginContext.mock.js');
 
   beforeEach(() => {
-    sandbox.reset();
+    sinon.restore();
     pluginOauth = new PluginOAuth();
-    pluginOauth.getProviderRepository = sandbox.stub();
-    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve({foo: 'bar'}));
+    pluginOauth.getProviderRepository = sinon.stub();
+    pluginOauth.getCredentialsFromKuid = sinon.stub().resolves({foo: 'bar'});
     pluginOauth.context = pluginContext;
 
     pluginOauth.config = {
@@ -26,12 +26,12 @@ describe('#verify', () => {
   });
 
   it('should resolve an existing user', () => {
-    pluginOauth.getProviderRepository = sandbox.stub().returns({get: sandbox.stub().returns(Promise.resolve({kuid: '24'}))});
+    pluginOauth.getProviderRepository = sinon.stub().returns({get: sinon.stub().resolves({kuid: '24'})});
     return should(pluginOauth.verify(null, null, null, {provider: 'facebook', _json: {id: '42'}})).be.fulfilledWith({kuid: '24', message: null});
   });
 
   it('should resolve with the new user id and persist it', () => {
-    pluginOauth.getProviderRepository = sandbox.stub().returns({get: sandbox.stub().returns(Promise.resolve(null))});
+    pluginOauth.getProviderRepository = sinon.stub().returns({get: sinon.stub().resolves(null)});
     pluginOauth.config.strategies.facebook.persist = ['name'];
 
     return pluginOauth.verify({}, null, null, {provider: 'facebook', _json: {id: '42', name: 'foo'}})
@@ -44,8 +44,8 @@ describe('#verify', () => {
   it('should resolve with the new user id and persist it with some mapping', (done) => {
     let status = 'pending';
 
-    pluginOauth.getProviderRepository = sandbox.stub().returns({get: sandbox.stub().returns(Promise.resolve(null))});
-    pluginOauth.context.constructors.Request = sandbox.stub().callsFake(() => {
+    pluginOauth.getProviderRepository = sinon.stub().returns({get: sinon.stub().resolves(null)});
+    pluginOauth.context.constructors.Request = sinon.stub().callsFake(() => {
       try {
         status = 'verified';
       }

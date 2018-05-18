@@ -1,7 +1,7 @@
 const
   should = require('should'),
   PluginOAuth = require('../lib'),
-  sandbox = require('sinon').sandbox.create();
+  sinon = require('sinon');
 
 describe('#getInfo', () => {
   let
@@ -9,19 +9,19 @@ describe('#getInfo', () => {
     pluginContext = require('./mock/pluginContext.mock.js');
 
   beforeEach(() => {
-    sandbox.reset();
+    sinon.restore();
     pluginOauth = new PluginOAuth();
-    pluginOauth.getProviderRepository = sandbox.stub();
+    pluginOauth.getProviderRepository = sinon.stub();
     pluginOauth.context = pluginContext;
   });
 
   it('should reject because the user doesn\'t exist', () => {
-    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve(null));
+    pluginOauth.getCredentialsFromKuid = sinon.stub().resolves(null);
     return should(pluginOauth.getInfo(null, {_id: 'foo'})).be.rejectedWith('A strategy does not exist for this user.');
   });
 
   it('should resolve the info without _id', () => {
-    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve({foo: 'bar'}));
+    pluginOauth.getCredentialsFromKuid = sinon.stub().resolves({foo: 'bar'});
     return should(pluginOauth.getInfo(null, {_id: 'foo'})).be.fulfilledWith({foo: 'bar'});
   });
 });

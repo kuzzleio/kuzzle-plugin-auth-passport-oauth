@@ -1,24 +1,24 @@
 const
   should = require('should'),
   PluginOAuth = require('../lib'),
-  sandbox = require('sinon').sandbox.create();
+  sinon = require('sinon');
 
 describe('#exists', () => {
   let pluginOauth;
 
   beforeEach(() => {
-    sandbox.reset();
+    sinon.restore();
     pluginOauth = new PluginOAuth();
-    pluginOauth.getProviderRepository = sandbox.stub();
+    pluginOauth.getProviderRepository = sinon.stub();
   });
 
   it('should resolve true if user exists', () => {
-    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve({_id: '42'}));
+    pluginOauth.getCredentialsFromKuid = sinon.stub().resolves({_id: '42'});
     return should(pluginOauth.exists()).be.fulfilledWith(true);
   });
 
   it('should resolve false if user doesn\'t exists', () => {
-    pluginOauth.getCredentialsFromKuid = sandbox.stub().returns(Promise.resolve(null));
+    pluginOauth.getCredentialsFromKuid = sinon.stub().resolves(null);
     return should(pluginOauth.exists()).be.fulfilledWith(false);
   });
 });

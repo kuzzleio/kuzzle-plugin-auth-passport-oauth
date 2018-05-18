@@ -1,10 +1,10 @@
 const
   should = require('should'),
   proxyquire = require('proxyquire'),
-  sandbox = require('sinon').sandbox.create(),
+  sinon = require('sinon'),
   PluginOAuth = proxyquire('../lib', {
     'passport-oauth2-refresh': {
-      use: sandbox.stub()
+      use: sinon.stub()
     }
   });
 
@@ -24,7 +24,7 @@ describe('#init', () => {
     };
 
   beforeEach(() => {
-    sandbox.reset();
+    sinon.restore();
     pluginOauth = new PluginOAuth();
   });
 

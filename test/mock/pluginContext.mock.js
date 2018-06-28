@@ -7,6 +7,9 @@ module.exports = {
     Repository: sinon.stub(),
     Request: sinon.stub()
   },
+  config: {
+    version: '1.4.0'
+  },
   accessors: {
     storage: {
       bootstrap: sinon.stub().returns(Promise.resolve())

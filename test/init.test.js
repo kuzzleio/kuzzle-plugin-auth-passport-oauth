@@ -45,11 +45,63 @@ describe('#init', () => {
     }, pluginContext)).be.rejectedWith('Error loading strategy [fake]: Cannot find module \'passport-fake\'');
   });
 
-  it('should initialize all strategies', done => {
-    pluginOauth.init(config, pluginContext)
+  it('should initialize all strategies', () => {
+    return pluginOauth.init(config, pluginContext)
       .then(() => {
-        should(pluginOauth.strategies).be.Object();
-        done();
+        should(pluginOauth.strategies).be.Object().and.match({
+          facebook: {
+            config: {
+              authenticator: 'facebook',
+              strategyOptions: {
+                clientId: 'clientId',
+                secret: 'secret'
+              },
+              authenticateOptions: {}
+            },
+            methods: {
+              afterRegister: 'afterRegister',
+              create: 'create',
+              delete: 'delete',
+              exists: 'exists',
+              getById: 'getById',
+              getInfo: 'getInfo',
+              update: 'update',
+              validate: 'validate',
+              verify: 'verify'
+            }
+          }
+        });
+      });
+  });
+
+  it('should expose a constructor property to Kuzzle pre-1.4.0', () => {
+    pluginContext.config.version = '1.3.999';
+    return pluginOauth.init(config, pluginContext)
+      .then(() => {
+        pluginContext.config.version = '1.4.0';
+        should(pluginOauth.strategies).be.Object().and.match({
+          facebook: {
+            config: {
+              constructor: () => {},
+              strategyOptions: {
+                clientId: 'clientId',
+                secret: 'secret'
+              },
+              authenticateOptions: {}
+            },
+            methods: {
+              afterRegister: 'afterRegister',
+              create: 'create',
+              delete: 'delete',
+              exists: 'exists',
+              getById: 'getById',
+              getInfo: 'getInfo',
+              update: 'update',
+              validate: 'validate',
+              verify: 'verify'
+            }
+          }
+        });
       });
   });
 });

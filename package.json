@@ -1,6 +1,6 @@
 {
   "name": "kuzzle-plugin-auth-passport-oauth",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "Kuzzle plugin to log-in users through passport's strategies",
   "main": "./lib/index.js",
   "scripts": {

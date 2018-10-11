@@ -25,6 +25,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "kuzzle-common-objects": "^3.0.13",
     "passport": "0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-github": "^1.1.0",

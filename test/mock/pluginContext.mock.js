@@ -18,6 +18,15 @@ module.exports = {
   },
   errors: {
     BadRequestError: defaultError,
-    ForbiddenError: defaultError
+    ForbiddenError: defaultError,
+    NotFoundError: class NotFoundError extends Error {
+      constructor (message) {
+        super(message);
+      }
+    
+      get name () {
+        return 'NotFoundError';
+      }
+    }
   }
 };

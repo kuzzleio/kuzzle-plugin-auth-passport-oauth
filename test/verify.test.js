@@ -1,10 +1,7 @@
 const
   should = require('should'),
   PluginOAuth = require('../lib'),
-  sinon = require('sinon'),
-  {
-    NotFoundError
-  } = require('kuzzle-common-objects').errors;
+  sinon = require('sinon');
 
 describe('#verify', () => {
   let
@@ -34,10 +31,10 @@ describe('#verify', () => {
   });
 
   it('should resolve with the new user id and persist it', () => {
-    pluginOauth.getProviderRepository = sinon.stub().returns({get: sinon.stub().rejects(new NotFoundError())});
+    pluginOauth.getProviderRepository = sinon.stub().returns({get: sinon.stub().rejects(new pluginOauth.context.errors.NotFoundError())});
     pluginOauth.config.strategies.facebook.persist = ['name'];
 
-    return pluginOauth.verify({}, null, null, {provider: 'facebook', _json: {id: '42', name: 'foo'}})
+    return pluginOauth.verify({}, null, null, {provider: 'facebook', _json: {id: '42', name: 'foo'}, persist:['id']})
       .then(result => {
         should(result).match({kuid: '42', message: null});
         should(pluginOauth.context.accessors.execute.called).be.true();
@@ -47,7 +44,7 @@ describe('#verify', () => {
   it('should resolve with the new user id and persist it with some mapping', (done) => {
     let status = 'pending';
 
-    pluginOauth.getProviderRepository = sinon.stub().returns({get: sinon.stub().rejects(new NotFoundError())});
+    pluginOauth.getProviderRepository = sinon.stub().returns({get: sinon.stub().rejects(new pluginOauth.context.errors.NotFoundError())});
     pluginOauth.context.constructors.Request = sinon.stub().callsFake(() => {
       try {
         status = 'verified';

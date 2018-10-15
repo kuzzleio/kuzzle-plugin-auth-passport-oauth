@@ -44,7 +44,7 @@ Here is an example of a configuration:
                 "public_profile"
             ],
             "kuzzleAttributesMapping": {
-              "userMail": "email"
+              "userMail": "email" // will store the attribute "email" as "userEmail" into Kuzzle
             },
             "identifierAttribute": "id"
         }

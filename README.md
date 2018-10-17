@@ -31,7 +31,8 @@ Here is an example of a configuration:
             "credentials": {
                 "clientID": "<your-client-id>",
                 "clientSecret": "<your-client-secret>",
-                "callbackURL": "http://localhost:8080/_login/facebook"
+                "callbackURL": "http://localhost:8080/_login/facebook",
+                "profileFields": ["id", "name", "picture", "email", "gender"]
             },
             "persist": [
                 "login",

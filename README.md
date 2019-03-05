@@ -2,11 +2,11 @@
 
 # Plugin Passport OAUTH Authentication
 
-This plugin provides an authentication with [passportjs strategies](http://passportjs.org/docs).
+This plugin provides an authentication with [Passeport.js strategies](http://passportjs.org/docs).
 
 # Configuration
 
-To edit the configuration of a plugin see [custom plugin configuration](https://docs.kuzzle.io/plugins-reference/plugins-creation-prerequisites/#custom-plugin-configuration).
+To edit the configuration of a plugin see [custom plugin configuration](https://docs.kuzzle.io/plugins/1/essentials/getting-started/#configuration).
 
 List of available configurations:
 
@@ -23,7 +23,7 @@ List of available configurations:
 
 Here is an example of a configuration:
 
-```json
+```js
 {
     "strategies": {
         "facebook": {
@@ -60,9 +60,9 @@ Here is an example of a configuration:
 
 The easiest way to implement an oauth authentication in your front-end is to use the [sdk login oauth popup module](https://github.com/kuzzleio/kuzzle-sdk-login-oauth-popup)
 
-See [Kuzzle API Documentation](http://kuzzleio.github.io/kuzzle-api-documentation/#auth-controller) for more details about Kuzzle authentication mechanism.
+See [Kuzzle API Documentation](https://docs.kuzzle.io/guide/1/essentials/user-authentication/) for more details about Kuzzle authentication mechanism.
 
 # How to create a plugin
 
-See [Kuzzle documentation](http://docs.kuzzle.io/plugin-reference/#plugin-creation-prerequisites) about plugin for more information about how to create your own plugin.
+See [Kuzzle documentation](https://docs.kuzzle.io/plugins/1/essentials/strategies/) about plugin for more information about how to create your own plugin.
 

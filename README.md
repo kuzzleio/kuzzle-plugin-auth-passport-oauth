@@ -18,8 +18,8 @@ List of available configurations:
 | ``scope`` | ``[]`` | Array | List of fields in the OAUTH 2.0 scope of access |
 | ``identifierAttribute`` | | String | Attribute from the profile of the provider to use as Id if you want to persist the user in Kuzzle |
 | ``defaultProfile`` | ``"default"`` | Array | Profiles of the new persisted user |
-| ``kuzzleAttributesMapping`` | ```` | Object | Mapping of attributes to persist in the user persisted in Kuzzle |
-| ``passportStrategy`` | ```` | String | Strategy name for passport (eg. google-oauth20 while the name of the provider is google)
+| ``kuzzleAttributesMapping`` | ``{}`` | Object | Mapping of attributes to persist in the user persisted in Kuzzle |
+| ``passportStrategy`` | ``''`` | String | Strategy name for passport (eg. google-oauth20 while the name of the provider is google)
 
 Here is an example of a configuration:
 

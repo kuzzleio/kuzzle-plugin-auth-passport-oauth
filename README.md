@@ -6,7 +6,7 @@ This plugin provides an authentication with [Passeport.js strategies](http://pas
 
 # Configuration
 
-To edit the configuration of a plugin see [custom plugin configuration](https://docs.kuzzle.io/plugins/1/essentials/getting-started/#configuration).
+To edit the configuration of a plugin see [custom plugin configuration](https://docs.kuzzle.io/core/1/plugins/guides/manual-setup/config/).
 
 List of available configurations:
 

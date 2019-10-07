@@ -4,6 +4,13 @@
 
 This plugin provides an authentication with [Passeport.js strategies](http://passportjs.org/docs).
 
+## Compatibility matrice
+
+| Kuzzle Version | Plugin Version |
+| -------------- | -------------- |
+| 1.x.x          | 4.x.x          | 
+| 2.x.x          | 5.x.x          | 
+
 # Configuration
 
 To edit the configuration of a plugin see [custom plugin configuration](https://docs.kuzzle.io/plugins/1/essentials/getting-started/#configuration).
@@ -65,4 +72,3 @@ See [Kuzzle API Documentation](https://docs.kuzzle.io/guide/1/essentials/user-au
 # How to create a plugin
 
 See [Kuzzle documentation](https://docs.kuzzle.io/plugins/1/essentials/strategies/) about plugin for more information about how to create your own plugin.
-

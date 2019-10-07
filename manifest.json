@@ -1,5 +1,4 @@
 {
   "name": "kuzzle-plugin-auth-passport-oauth",
-  "kuzzleVersion": ">=1.0.0 <2.0.0",
-  "privileged": false
+  "kuzzleVersion": ">=2.0.0 <3.0.0"
 }

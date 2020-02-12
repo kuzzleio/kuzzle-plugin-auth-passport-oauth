@@ -12,9 +12,9 @@ module.exports = {
   },
   accessors: {
     storage: {
-      bootstrap: sinon.stub().returns(Promise.resolve())
+      bootstrap: sinon.stub().resolves()
     },
-    execute: sinon.stub().returns(Promise.resolve({result: {_id: '42'}}))
+    execute: sinon.stub().resolves({ result: { _id: '42' } })
   },
   errors: {
     BadRequestError: defaultError,
@@ -23,7 +23,7 @@ module.exports = {
       constructor (message) {
         super(message);
       }
-    
+
       get name () {
         return 'NotFoundError';
       }

@@ -8,6 +8,8 @@ const
     }
   });
 
+require('should-sinon');
+
 describe('#init', () => {
   let
     pluginOauth,
@@ -24,9 +26,12 @@ describe('#init', () => {
     };
 
   beforeEach(() => {
-    sinon.restore();
     pluginOauth = new PluginOAuth();
   });
+
+  afterEach(() => {
+    sinon.restore();
+  })
 
   it('should reject if no credentials are specified', () => {
     return should(pluginOauth.init({strategies: {facebook: {}}}, pluginContext)).be.rejectedWith('Error loading strategy [facebook]: no credentials provided');
@@ -42,7 +47,7 @@ describe('#init', () => {
           }
         }
       }
-    }, pluginContext)).be.rejectedWith('Error loading strategy [fake]: Cannot find module \'passport-fake\'');
+    }, pluginContext)).be.rejectedWith(/Error loading strategy \[fake\]: Cannot find module/);
   });
 
   it('should initialize all strategies', () => {
@@ -74,34 +79,18 @@ describe('#init', () => {
       });
   });
 
-  it('should expose a constructor property to Kuzzle pre-1.4.0', () => {
-    pluginContext.config.version = '1.3.999';
-    return pluginOauth.init(config, pluginContext)
-      .then(() => {
-        pluginContext.config.version = '1.4.0';
-        should(pluginOauth.strategies).be.Object().and.match({
-          facebook: {
-            config: {
-              constructor: () => {},
-              strategyOptions: {
-                clientId: 'clientId',
-                secret: 'secret'
-              },
-              authenticateOptions: {}
-            },
-            methods: {
-              afterRegister: 'afterRegister',
-              create: 'create',
-              delete: 'delete',
-              exists: 'exists',
-              getById: 'getById',
-              getInfo: 'getInfo',
-              update: 'update',
-              validate: 'validate',
-              verify: 'verify'
-            }
-          }
-        });
-      });
+  it('should initialize the collections mappings', async () => {
+    await pluginOauth.init(config, pluginContext);
+
+    const facebookMappings = {
+      facebook: {
+        properties: {
+          kuid: { type: 'keyword' }
+        }
+      }
+    };
+    should(pluginContext.accessors.storage.bootstrap)
+      .be.calledWith(pluginOauth.storageMappings) // init plugin collections
+      .be.calledWith(facebookMappings) // init facebook strategy collection
   });
 });

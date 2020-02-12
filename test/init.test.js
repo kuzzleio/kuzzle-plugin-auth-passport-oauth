@@ -31,7 +31,7 @@ describe('#init', () => {
 
   afterEach(() => {
     sinon.restore();
-  })
+  });
 
   it('should reject if no credentials are specified', () => {
     return should(pluginOauth.init({strategies: {facebook: {}}}, pluginContext)).be.rejectedWith('Error loading strategy [facebook]: no credentials provided');
@@ -91,6 +91,6 @@ describe('#init', () => {
     };
     should(pluginContext.accessors.storage.bootstrap)
       .be.calledWith(pluginOauth.storageMappings) // init plugin collections
-      .be.calledWith(facebookMappings) // init facebook strategy collection
+      .be.calledWith(facebookMappings); // init facebook strategy collection
   });
 });

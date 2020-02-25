@@ -1,6 +1,6 @@
 {
   "name": "kuzzle-plugin-auth-passport-oauth",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Kuzzle plugin to log-in users through passport's strategies",
   "main": "./lib/index.js",
   "scripts": {
@@ -25,24 +25,23 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "passport": "0.4.0",
+    "passport": "^0.4.1",
     "passport-facebook": "^2.1.1",
     "passport-github": "^1.1.0",
     "passport-google-oauth": "^1.0.0",
     "passport-google-oauth20": "^1.0.0",
-    "passport-oauth2": "1.x.x",
-    "passport-oauth2-refresh": "1.1.0",
-    "passport-twitter": "^1.0.4",
-    "semver": "^5.5.1"
+    "passport-oauth2": "^1.5.0",
+    "passport-oauth2-refresh": "^1.1.0",
+    "passport-twitter": "^1.0.4"
   },
   "devDependencies": {
     "eslint": "5.5.0",
     "mocha": "5.2.0",
-    "nyc": "^13.0.1",
-    "proxyquire": "^2.1.0",
-    "should": "13.2.3",
+    "nyc": "^13.3.0",
+    "proxyquire": "^2.1.3",
+    "should": "^13.2.3",
     "should-sinon": "0.0.6",
-    "sinon": "^6.3.1"
+    "sinon": "^6.3.5"
   },
   "gitHead": "06f51a7b72065f5961f135b75d7a937b2937b83d",
   "homepage": "https://github.com/kuzzleio/kuzzle-plugin-auth-github#readme",

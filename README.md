@@ -2,7 +2,7 @@
 
 # Plugin Passport OAUTH Authentication
 
-This plugin provides an authentication with [Passeport.js strategies](http://passportjs.org/docs).
+This plugin provides OAUTH2 authentication using [Passport.js strategies](http://passportjs.org/docs).
 
 ## Compatibility matrice
 
@@ -13,7 +13,7 @@ This plugin provides an authentication with [Passeport.js strategies](http://pas
 
 # Configuration
 
-To edit the configuration of a plugin see [custom plugin configuration](https://docs.kuzzle.io/plugins/2/essentials/getting-started/#configuration).
+To edit the configuration of a plugin see [custom plugin configuration](https://docs.kuzzle.io/core/2/guides/essentials/configuration).
 
 List of available configurations:
 
@@ -67,8 +67,8 @@ Here is an example of a configuration:
 
 The easiest way to implement an oauth authentication in your front-end is to use the [sdk login oauth popup module](https://github.com/kuzzleio/kuzzle-sdk-login-oauth-popup)
 
-See [Kuzzle API Documentation](https://docs.kuzzle.io/guide/2/essentials/user-authentication/) for more details about Kuzzle authentication mechanism.
+See [Kuzzle API Documentation](https://docs.kuzzle.io/core/2/guides/essentials/user-authentication/) for more details about Kuzzle authentication mechanism.
 
 # How to create a plugin
 
-See [Kuzzle documentation](https://docs.kuzzle.io/plugins/2/essentials/strategies/) about plugin for more information about how to create your own plugin.
+See [Kuzzle documentation](https://docs.kuzzle.io/core/2/plugins/essentials/introduction/) for more information about how to create your own plugin.

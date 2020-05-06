@@ -4,9 +4,8 @@ const
   sinon = require('sinon');
 
 describe('#getById', () => {
-  let
-    pluginOauth,
-    pluginContext = require('./mock/pluginContext.mock.js');
+  let pluginOauth;
+  let pluginContext = require('./mock/pluginContext.mock.js');
 
   beforeEach(() => {
     sinon.restore();
@@ -16,8 +15,8 @@ describe('#getById', () => {
   });
 
   it('should reject because the user doesn\'t exist', () => {
-    pluginOauth.getProviderRepository = sinon.stub().returns({get: sinon.stub().resolves(null)});
-    return should(pluginOauth.getById(null, '42')).be.rejectedWith('A strategy does not exist for this user.');
+    pluginOauth.getProviderRepository = sinon.stub().returns({get: sinon.stub().rejects()});
+    return should(pluginOauth.getById(null, '42')).be.rejected();
   });
 
   it('should resolve true', () => {

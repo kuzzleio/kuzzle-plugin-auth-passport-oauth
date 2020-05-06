@@ -4,9 +4,8 @@ const
   sinon = require('sinon');
 
 describe('#delete', () => {
-  let
-    pluginOauth,
-    pluginContext = require('./mock/pluginContext.mock.js');
+  let pluginOauth;
+  let pluginContext = require('./mock/pluginContext.mock.js');
 
   beforeEach(() => {
     sinon.restore();
@@ -17,7 +16,8 @@ describe('#delete', () => {
 
   it('should reject if the user doesn\'t exists', () => {
     pluginOauth.getCredentialsFromKuid = sinon.stub().resolves(null);
-    return should(pluginOauth.delete()).be.rejectedWith('A strategy does not exist for this user.');
+
+    return should(pluginOauth.delete()).be.rejected();
   });
 
   it('should delete a user', () => {
@@ -25,6 +25,7 @@ describe('#delete', () => {
 
     pluginOauth.getProviderRepository = sinon.stub().returns({delete: del});
     pluginOauth.getCredentialsFromKuid = sinon.stub().resolves({_id: 'foo'});
+
     return pluginOauth.delete()
       .then(() => should(del.calledOnce).be.true());
   });

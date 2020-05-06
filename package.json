@@ -4,7 +4,10 @@
   "description": "Kuzzle plugin to log-in users through passport's strategies",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "eslint --max-warnings=0 ./lib ./test && nyc --reporter=text-summary --reporter=lcov mocha"
+    "test": "npm run test:lint && npm run test:unit",
+    "test:unit": "nyc --reporter=text-summary --reporter=lcov mocha",
+    "test:lint": "eslint --max-warnings=0 ./lib ./test",
+    "test:lint:fix": "eslint --fix --max-warnings=0 ./lib ./test"
   },
   "repository": {
     "type": "git",
@@ -25,6 +28,8 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "lodash.get": "^4.4.2",
+    "lodash.set": "^4.3.2",
     "passport": "^0.4.1",
     "passport-facebook": "^2.1.1",
     "passport-github": "^1.1.0",

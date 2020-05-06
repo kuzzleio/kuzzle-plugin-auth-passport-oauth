@@ -16,8 +16,9 @@ describe('#update', () => {
   });
 
   it('should reject if the user doesn\'t exists', () => {
-    pluginOauth.getCredentialsFromKuid = sinon.stub().resolves(null);
-    return should(pluginOauth.update()).be.rejectedWith('A strategy does not exist for this user.');
+    pluginOauth.getCredentialsFromKuid = sinon.stub().rejects(new Error());
+
+    return should(pluginOauth.update()).be.rejected();
   });
 
   it('should update a user', () => {
@@ -25,6 +26,7 @@ describe('#update', () => {
 
     pluginOauth.getProviderRepository = sinon.stub().returns({update});
     pluginOauth.getCredentialsFromKuid = sinon.stub().resolves({_id: 'foo'});
+
     return pluginOauth.update()
       .then(() => {
         should(update.calledOnce).be.true();

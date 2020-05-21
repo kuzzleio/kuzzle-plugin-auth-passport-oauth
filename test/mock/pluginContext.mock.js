@@ -14,7 +14,12 @@ module.exports = {
     storage: {
       bootstrap: sinon.stub().resolves()
     },
-    execute: sinon.stub().resolves({ result: { _id: '42' } })
+    sdk: {
+      security: {
+        createUser: sinon.stub().resolves()
+      }
+    },
+    execute: sinon.stub().resolves()
   },
   errors: {
     BadRequestError: defaultError,

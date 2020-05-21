@@ -4,9 +4,8 @@ const
   sinon = require('sinon');
 
 describe('#verify', () => {
-  let
-    pluginOauth,
-    pluginContext = require('./mock/pluginContext.mock.js');
+  let pluginOauth;
+  let pluginContext = require('./mock/pluginContext.mock.js');
 
   beforeEach(() => {
     sinon.restore();
@@ -23,47 +22,74 @@ describe('#verify', () => {
         }
       }
     };
+
+    pluginContext.accessors.sdk.security.createUser.resolves({ _id: '42' });
   });
 
   it('should resolve an existing user', () => {
-    pluginOauth.getProviderRepository = sinon.stub().returns({get: sinon.stub().resolves({kuid: '24'})});
-    return should(pluginOauth.verify(null, null, null, {provider: 'facebook', _json: {id: '42'}})).be.fulfilledWith({kuid: '24', message: null});
+    pluginOauth.getProviderRepository = sinon.stub()
+      .returns({get: sinon.stub().resolves({kuid: '24'})});
+
+    return should(
+      pluginOauth.verify(null, null, null, {provider: 'facebook', _json: {id: '42'}})
+    ).be.fulfilledWith({kuid: '24'});
   });
 
   it('should resolve with the new user id and persist it', () => {
-    pluginOauth.getProviderRepository = sinon.stub().returns({get: sinon.stub().rejects(new pluginOauth.context.errors.NotFoundError())});
+    const oauthPayload = {
+      id: '42',
+      name: 'foo'
+    };
+    pluginOauth.getProviderRepository = sinon.stub()
+      .returns({get: sinon.stub().rejects({ id: 'services.storage.not_found'})});
+
     pluginOauth.config.strategies.facebook.persist = ['name'];
 
-    return pluginOauth.verify({}, null, null, {provider: 'facebook', _json: {id: '42', name: 'foo'}, persist:['id']})
+    return pluginOauth.verify(
+      {}, null, null, {provider: 'facebook', _json: oauthPayload}
+    )
       .then(result => {
-        should(result).match({kuid: '42', message: null});
-        should(pluginOauth.context.accessors.execute.called).be.true();
+        should(result).match({kuid: '42'});
+        should(pluginContext.accessors.sdk.security.createUser).be.called();
       });
   });
 
-  it('should resolve with the new user id and persist it with some mapping', (done) => {
-    let status = 'pending';
+  it('should resolve with the new user id and persist attributes with provided mapping', () => {
+    const oauthPayload = {
+      id: '42',
+      profile: {
+        picture: 'http://picture.url'
+      },
+      first_name: 'gordon'
+    };
 
-    pluginOauth.getProviderRepository = sinon.stub().returns({get: sinon.stub().rejects(new pluginOauth.context.errors.NotFoundError())});
-    pluginOauth.context.constructors.Request = sinon.stub().callsFake(() => {
-      try {
-        status = 'verified';
-      }
-      catch (e) {
-        status = 'error: ' + e;
-      }
-    });
+    pluginOauth.getProviderRepository = sinon.stub()
+      .returns({get: sinon.stub().rejects({ id: 'services.storage.not_found'})});
 
-    pluginOauth.config.strategies.facebook.persist = ['name'];
+    pluginOauth.config.defaultProfiles = ['oauth-default'];
+    pluginOauth.config.strategies.facebook.persist = ['profile.picture', 'first_name'];
+    pluginOauth.config.strategies.facebook.kuzzleAttributesMapping = { first_name: 'fb.first_name' };
 
-    pluginOauth.verify({}, null, null, {provider: 'facebook', _json: {id: '42', name: 'foo', displayName: 'Displayed name'}})
-      .then(() => {
-        if (status === 'verified') {
-          done();
-        } else {
-          done('Unexpected test result: ' + status);
-        }
-      })
-      .catch(e => done(e));
+    return pluginOauth.verify(
+      {}, null, null, { provider: 'facebook', _json: oauthPayload }
+    )
+      .then(result => {
+        should(result).match({ kuid: '42' });
+        should(pluginContext.accessors.sdk.security.createUser).be.calledWithMatch(null, {
+          content: {
+            profileIds: ['oauth-default']
+          },
+          credentials: {
+            facebook: {
+              fb: {
+                first_name: 'gordon'
+              },
+              profile: {
+                picture: 'http://picture.url'
+              }
+            }
+          }
+        });
+      });
   });
 });

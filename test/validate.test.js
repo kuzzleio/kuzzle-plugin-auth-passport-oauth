@@ -16,24 +16,30 @@ describe('#validate', () => {
     pluginOauth.config = {strategies: {local: {identifierAttribute: '_id'}}};
   });
 
-  it('should resolve true if the user doesn\'t exists', () => {
-    const get = sinon.stub().resolves(null);
+  it('should resolve with true if the user doesn\'t exists', () => {
+    const get = sinon.stub().resolves({ kuid: '42' });
 
     pluginOauth.getProviderRepository = sinon.stub().returns({get});
-    return should(pluginOauth.validate(null, {_id: 'foo'}, '42', 'local')).be.fulfilledWith(true);
+
+    return should(pluginOauth.validate(null, {_id: 'foo'}, '42', 'local'))
+      .be.fulfilledWith(true);
   });
 
-  it('should reject a promise if the kuid is not equal to the fetched user', () => {
+  it('should rejects if the kuid is not equal to the fetched user', () => {
     const get = sinon.stub().resolves({kuid: '42'});
 
     pluginOauth.getProviderRepository = sinon.stub().returns({get});
-    return should(pluginOauth.validate(null, {_id: '0'}, '0', 'local')).be.rejectedWith('Id \'0\' is already used.');
+
+    return should(pluginOauth.validate(null, {_id: '0'}, '0', 'local'))
+      .be.rejected();
   });
 
   it('should resolve true', () => {
     const get = sinon.stub().resolves({kuid: '42'});
 
     pluginOauth.getProviderRepository = sinon.stub().returns({get});
-    return should(pluginOauth.validate(null, {_id: '42'}, '42', 'local')).be.fulfilledWith(true);
+
+    return should(pluginOauth.validate(null, {_id: '42'}, '42', 'local'))
+      .be.fulfilledWith(true);
   });
 });

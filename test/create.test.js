@@ -18,7 +18,8 @@ describe('#create', () => {
 
   it('should reject if the user already exists', () => {
     pluginOauth.exists = sinon.stub().resolves(true);
-    return should(pluginOauth.create()).be.rejectedWith('A strategy already exists for this user.');
+
+    return should(pluginOauth.create()).be.rejected();
   });
 
   it('should create a user', () => {

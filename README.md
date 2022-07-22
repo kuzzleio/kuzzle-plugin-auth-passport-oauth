@@ -125,4 +125,4 @@ See [Kuzzle API Documentation](https://docs.kuzzle.io/core/2/guides/essentials/u
 
 # How to create a plugin
 
-See [Kuzzle documentation](https://docs.kuzzle.io/core/2/plugins/essentials/introduction/) for more information about how to create your own plugin.
+See [Kuzzle documentation](https://docs.kuzzle.io/core/2/guides/write-plugins/start-writing-plugins/) for more information about how to create your own plugin.

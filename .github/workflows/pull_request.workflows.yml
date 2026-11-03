@@ -1,0 +1,22 @@
+name: Pull request checks
+
+on: [pull_request]
+
+jobs:
+  tests:
+    name: Tests (Node.js ${{ matrix.node-version }})
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        node-version: ["20", "22", "24"]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Launch tests
+        run: npm test
